@@ -281,11 +281,3 @@ For cub3D, MLX is NOT a full API to study.
 It is just:
 
 > "create window → draw pixels in buffer → push to screen → repeat"
-
----
-
-If you want next step, I can:
-
-- build your **cub3D rendering pipeline diagram**
-    
-- or show exactly how raycasting plugs into `mlx_loop_hook` (this is where everything clicks)
