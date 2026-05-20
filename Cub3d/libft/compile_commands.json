@@ -1,0 +1,19 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "build/ft_convert/ft_atoi.o",
+      "src/ft_convert/ft_atoi.c"
+    ],
+    "directory": "/home/joao/codes/libft_WIP",
+    "file": "/home/joao/codes/libft_WIP/src/ft_convert/ft_atoi.c",
+    "output": "/home/joao/codes/libft_WIP/build/ft_convert/ft_atoi.o"
+  }
+]
