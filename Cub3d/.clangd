@@ -1,8 +1,8 @@
 CompileFlags:
   Add:
-    - "-I./includes"
-    - "-I../includes"
-    - "-I../../includes"
-    - "-I./libft/includes"
-    - "-I../libft/includes"
-    - "-I../../libft/includes"
+    - "-I./include"
+    - "-I../include"
+    - "-I../../include"
+    - "-I./libft/include"
+    - "-I../libft/include"
+    - "-I../../libft/include"
