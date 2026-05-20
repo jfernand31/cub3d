@@ -1,0 +1,10 @@
+# Ignore object and dependency files
+*.o
+*.d
+
+# Optionally, ignore compiled binary
+libft.a
+
+# Ignore the object directory completely
+obj/
+
