@@ -11,6 +11,7 @@ LIBS		= -L./libft -lft -L./minilibx-linux -lmlx -lX11 -lXext -lm
 
 # Sources — add new .o files here as you create .c files
 OBJ =		src/main.o \
+		src/game/game.o \
 
 # --- Rules ---
 

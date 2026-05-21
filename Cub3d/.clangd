@@ -6,3 +6,5 @@ CompileFlags:
     - "-I./libft/include"
     - "-I../libft/include"
     - "-I../../libft/include"
+    - "-I../minilibx-linux"
+    - "-I../../minilibx-linux"
