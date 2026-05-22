@@ -1,17 +1,58 @@
+#include <stdlib.h>
+#include <unistd.h>
 #include "cub3D.h"
 #include "libft.h"
 
 void	init_game(t_game *game)
 {
 	game->map = NULL;
-	game->player.pos.x = 0.0;
-	game->player.pos.y = 0.0;
-	game->player.dir.x = 0.0;
+	game->player.pos.x = 1.0;
+	game->player.pos.y = 1.0;
+	game->player.dir.x = 1.0;
 	game->player.dir.y = 0.0;
 	game->player.plane.x = 0.0;
 	game->player.plane.y = 0.66;
-	game->map_w = 0;
-	game->map_h = 0;
+	game->map_w = 4;
+	game->map_h = 4;
+	game->ceiling_color = 0x0000FF00;
+	game->floor_color = 0x000000FF;
+}
+
+void	rude_parse_map(char *file, t_game *game)
+{
+	if (!file)
+		return ;
+
+	game->map = (char **)ft_calloc(5, sizeof(char *));
+	int fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return ;
+	
+	int	i = 0;
+	char	*line = get_next_line(fd);
+	while(line)
+	{
+		game->map[i] = ft_strdup(line);
+		i++;
+		free(line);
+		line = get_next_line(fd);
+	}	
+	game->map[i] = NULL;
+}
+
+
+void	free_game(t_game *game)
+{
+	
+	if (game->map)
+	{
+		int i = 0;
+		while (i < game->map_h)
+		{
+			free(game->map[i]);
+			i++;
+		}
+	}
 }
 
 int	main(int argc, char **argv)
@@ -26,14 +67,14 @@ int	main(int argc, char **argv)
 	}
 
 	init_game(&game);
-//	game->map = parse_map(argv[1], &game);
-//	if (!game->map)
-//		return (1);
+	rude_parse_map(argv[1], &game);
+	if (!game.map)
+		return (1);
 	if (!run_game(&game))
 	{
-		//free_game(game);
+		free_game(&game);
 		return (1);
 	}
-//	free_game(game);
+	free_game(&game);
 	return (0);
 }

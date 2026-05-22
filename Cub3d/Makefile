@@ -1,7 +1,7 @@
 NAME		= cub3d
 
 CC		= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 INCLUDES	= -I./include -I./libft/include -I./minilibx-linux
 
 # Libraries

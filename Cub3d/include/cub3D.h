@@ -2,7 +2,10 @@
 # define CUB3D_H
 # include <stdbool.h>
 
+#define MINIMAP_SCALE 8
 #define TILE_SIZE 32
+#define WIDTH 1920
+#define HEIGHT 1080
 
 typedef struct s_vec2
 {
@@ -42,13 +45,15 @@ typedef struct s_ray
 
 typedef struct	s_game
 {
-	void	*mlx;
-	void	*win;
+	void		*mlx;
+	void		*win;
 	t_player	player;
 	char		**map;
 	int		map_w;
 	int		map_h;
 	t_ray		ray;
+	int		floor_color;
+	int		ceiling_color;
 }	t_game;
 
 bool	run_game(t_game *game);

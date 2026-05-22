@@ -15,7 +15,6 @@ NAME=get_new_line.a
 
 # Object files
 CFILES= ./get_next_line.c        \
-		./get_next_line_utils.c  \
 
 # .h files
 HFILES= ./get_new_line.h       \
@@ -23,7 +22,6 @@ HFILES= ./get_new_line.h       \
 
 # .c bonus files
 BFILES= ./get_next_line_bonus.c       \
-		./get_next_line_utils_bonus.c \
 
 # Object files
 OFILES= $(CFILES:.c=.o)
