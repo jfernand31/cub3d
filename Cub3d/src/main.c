@@ -12,8 +12,8 @@ void	init_game(t_game *game)
 	game->player.dir.y = 0.0;
 	game->player.plane.x = 0.0;
 	game->player.plane.y = 0.66;
-	game->map_w = 4;
-	game->map_h = 4;
+	game->map_w = 0;
+	game->map_h = 0;
 	game->ceiling_color = 0x0000FF00;
 	game->floor_color = 0x000000FF;
 }
@@ -23,14 +23,29 @@ void	rude_parse_map(char *file, t_game *game)
 	if (!file)
 		return ;
 
-	game->map = (char **)ft_calloc(5, sizeof(char *));
 	int fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return ;
 	
 	int	i = 0;
 	char	*line = get_next_line(fd);
-	while(line)
+	game->map_w = ft_strlen(line);
+	while (line)
+	{
+		i++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	game->map_h = i;
+	game->map = (char **)ft_calloc(game->map_h + 1, sizeof(char *));
+	free(line);
+	close(fd);
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return ;
+	i = 0;
+	line = get_next_line(fd);
+	while (line)
 	{
 		game->map[i] = ft_strdup(line);
 		i++;

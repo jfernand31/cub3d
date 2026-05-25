@@ -47,6 +47,7 @@ typedef struct	s_game
 {
 	void		*mlx;
 	void		*win;
+	t_data		img;
 	t_player	player;
 	char		**map;
 	int		map_w;
@@ -57,6 +58,9 @@ typedef struct	s_game
 }	t_game;
 
 bool	run_game(t_game *game);
+void	free_game(t_game *game);
+int	handle_key_press(int keycode, t_game *game);
+int	close_game(t_game *game);
 
 #endif
 

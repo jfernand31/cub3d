@@ -13,6 +13,24 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+void	draw_square_pixel(t_data *img, int x, int y, int color)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while(j < 4)
+	{
+		i = 0;
+		while (i < 4)
+		{
+			my_mlx_pixel_put(img, x + i, y + j, color);
+			i++;
+		}
+		j++;
+	}
+}
+
 
 void	draw_square(t_data *img, int x, int y, int color)
 {
@@ -56,16 +74,16 @@ void	draw_floor_ceiling(t_data *img, int floor, int ceiling)
 	}
 }
 
-void	draw_minimap(t_data *img, char **map, int map_h, int map_w)
+void	draw_minimap(t_data *img, char **map, t_game *game)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < map_h)
+	while (i < game->map_h)
 	{
 		j = 0;
-		while (j < map_w)
+		while (j < game->map_w)
 		{
 			if (map[i][j] == '1')
 				draw_square(img, j, i, 0x00FF0000);
@@ -75,22 +93,49 @@ void	draw_minimap(t_data *img, char **map, int map_h, int map_w)
 	}
 }
 
-void	load_map(t_data *img, char **map, t_game *game)
+void	draw_player(t_data *img, t_player *player)
 {
-	draw_floor_ceiling(img, game->floor_color, game->ceiling_color);
-	draw_minimap(img, map, game->map_h, game->map_w);
+	int	x;
+	int	y;
+
+	x = player->pos.x * MINIMAP_SCALE;
+	y = player->pos.y * MINIMAP_SCALE;
+
+	draw_square_pixel(img, x, y, 0xFFFFFF);
+}
+
+int	render(void *param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+
+	draw_floor_ceiling(&game->img,
+		game->floor_color,
+		game->ceiling_color);
+	draw_minimap(&game->img, game->map, game);
+	draw_player(&game->img, &game->player);
+
+	mlx_put_image_to_window(
+		game->mlx,
+		game->win,
+		game->img.img,
+		0,
+		0
+	);
+
+	return (0);
 }
 
 bool	run_game(t_game *game)
 {
-	t_data	img;
-
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3D");
-	img.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	load_map(&img, game->map, game);
-	mlx_put_image_to_window(game->mlx, game->win, img.img, 0, 0);
+	game->img.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel, &game->img.line_length, &game->img.endian);
+	mlx_loop_hook(game->mlx, (int (*)())render, game);
+	mlx_hook(game->win, 2, 1L << 0, (int (*)())handle_key_press, game);
+	mlx_hook(game->win, 17, 0, (int (*)())close_game, game);
 	mlx_loop(game->mlx);
 	return (true);
 }
