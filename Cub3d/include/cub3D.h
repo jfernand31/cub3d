@@ -57,10 +57,27 @@ typedef struct	s_game
 	int		ceiling_color;
 }	t_game;
 
+//game
 bool	run_game(t_game *game);
+
+//cleanup
 void	free_game(t_game *game);
+
+//events
 int	handle_key_press(int keycode, t_game *game);
 int	close_game(t_game *game);
+
+//render
+void	draw_floor_ceiling(t_data *img, int floor, int ceiling);
+void	draw_player(t_data *img, t_player *player);
+void	draw_minimap(t_data *img, char **map, t_game *game);
+void	draw_square(t_data *img, int x, int y, int color);
+void	draw_square_pixel(t_data *img, int x, int y, int color);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int	render(void *param);
+
+//raycast
+bool	raycast(char **map, t_player *player, t_data *img);
 
 #endif
 

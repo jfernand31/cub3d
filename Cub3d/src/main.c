@@ -6,10 +6,10 @@
 void	init_game(t_game *game)
 {
 	game->map = NULL;
-	game->player.pos.x = 1.0;
-	game->player.pos.y = 1.0;
+	game->player.pos.x = 2.0;
+	game->player.pos.y = 2.0;
 	game->player.dir.x = 1.0;
-	game->player.dir.y = 0.0;
+	game->player.dir.y = 0.4;
 	game->player.plane.x = 0.0;
 	game->player.plane.y = 0.66;
 	game->map_w = 0;
@@ -38,7 +38,6 @@ void	rude_parse_map(char *file, t_game *game)
 	}
 	game->map_h = i;
 	game->map = (char **)ft_calloc(game->map_h + 1, sizeof(char *));
-	free(line);
 	close(fd);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -47,6 +46,7 @@ void	rude_parse_map(char *file, t_game *game)
 	line = get_next_line(fd);
 	while (line)
 	{
+		line[ft_strlen(line) - 1] = '\0';
 		game->map[i] = ft_strdup(line);
 		i++;
 		free(line);
