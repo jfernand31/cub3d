@@ -6,6 +6,14 @@
 #define TILE_SIZE 32
 #define WIDTH 1920
 #define HEIGHT 1080
+#define KEY_W      119
+#define KEY_A      97
+#define KEY_S      115
+#define KEY_D      100
+#define KEY_LEFT   65361
+#define KEY_RIGHT  65363
+#define KEY_ESC    65307
+
 
 typedef struct s_vec2
 {
@@ -57,6 +65,9 @@ typedef struct	s_game
 	int		ceiling_color;
 }	t_game;
 
+//utils
+t_vec2	vec2_mult(t_vec2 v, float n);
+
 //game
 bool	run_game(t_game *game);
 
@@ -78,6 +89,10 @@ int	render(void *param);
 
 //raycast
 bool	raycast(char **map, t_player *player, t_data *img);
+
+//movement
+void	player_movement(t_game *game, int keycode);
+void	player_rotate(t_player *player, int keycode);
 
 #endif
 
