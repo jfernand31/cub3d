@@ -1,5 +1,11 @@
 #include "cub3D.h"
 
+static inline void	put_pixel(t_data *img, int x, int y, int color)
+{
+	((unsigned int *)img->addr)
+		[y * (img->line_length / 4) + x] = color;
+}
+
 void	draw_square_pixel(t_data *img, int x, int y, int color)
 {
 	int	i;
@@ -11,13 +17,12 @@ void	draw_square_pixel(t_data *img, int x, int y, int color)
 		i = 0;
 		while (i < 4)
 		{
-			my_mlx_pixel_put(img, x + i, y + j, color);
+			put_pixel(img, x + i, y + j, color);
 			i++;
 		}
 		j++;
 	}
 }
-
 
 void	draw_square(t_data *img, int x, int y, int color)
 {
@@ -30,7 +35,7 @@ void	draw_square(t_data *img, int x, int y, int color)
 		i = 0;
 		while (i < MINIMAP_SCALE)
 		{
-			my_mlx_pixel_put(img,
+			put_pixel(img,
 				x * MINIMAP_SCALE + i,
 				y * MINIMAP_SCALE + j,
 				color);
@@ -42,22 +47,24 @@ void	draw_square(t_data *img, int x, int y, int color)
 
 void	draw_floor_ceiling(t_data *img, int floor, int ceiling)
 {
-	int i;
-	int j;
+	int	x;
+	int	y;
 
-	i = 0;
-	while (i < HEIGHT)
+	y = 0;
+	while (y < HEIGHT / 2)
 	{
-		j = 0;
-		while (j < WIDTH)
-		{
-			if (i < HEIGHT / 2)
-				my_mlx_pixel_put(img, j, i, ceiling);
-			else
-				my_mlx_pixel_put(img, j, i, floor);
-			j++;
-		}
-		i++;
+		x = 0;
+		while (x < WIDTH)
+			put_pixel(img, x++, y, ceiling);
+		y++;
+	}
+
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+			put_pixel(img, x++, y, floor);
+		y++;
 	}
 }
 
@@ -90,3 +97,4 @@ void	draw_player(t_data *img, t_player *player)
 
 	draw_square_pixel(img, x, y, 0xFFFFFF);
 }
+

@@ -31,35 +31,35 @@ void	rotate(t_vec2 *vec, float rot)
 }
 
 
-void	player_rotate(t_player *player, int keycode)
+void	player_rotate(t_player *player, t_keys keys)
 {
-	const float	rot = 0.05;
+	const float	rot = 0.03;
 
-	if (keycode == KEY_RIGHT)
+	if (keys.right)
 	{
 		rotate(&player->dir, rot);
 		rotate(&player->plane, rot);
 	}
-	if (keycode == KEY_LEFT)
+	if (keys.left)
 	{
 		rotate(&player->dir, -rot);
 		rotate(&player->plane, -rot);
 	}
 }
 
-void	player_movement(t_game *game, int keycode)
+void	player_movement(t_game *game, t_keys keys)
 {
 	const float	speed = 0.05;
 	t_vec2		move;
 
 	move = (t_vec2){0,0};
-	if (keycode == KEY_W)
+	if (keys.w)
 		move = vec2_mult(game->player.dir, speed);
-	if (keycode == KEY_S)
+	if (keys.s)
 		move = vec2_mult(game->player.dir, -speed);
-	if (keycode == KEY_D)
+	if (keys.d)
 		move = vec2_mult(game->player.plane, speed);
-	if (keycode == KEY_A)
+	if (keys.a)
 		move = vec2_mult(game->player.plane, -speed);
 	try_move(game, move);
 }

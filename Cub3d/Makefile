@@ -16,7 +16,8 @@ OBJ =		src/main.o \
 		src/render/draw.o \
 		src/render/render.o \
 		src/raycasting/raycast.o \
-		src/player/movement.o
+		src/player/movement.o \
+		src/player/player_update.o
 
 # --- Rules ---
 

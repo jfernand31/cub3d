@@ -7,6 +7,23 @@ int	close_game(t_game *game)
 	exit(0);
 }
 
+int	handle_key_release(int keycode, t_game *game)
+{
+	if (keycode == KEY_W)
+		game->keys.w = false;
+	if (keycode == KEY_S)
+		game->keys.s = false;
+	if (keycode == KEY_D)
+		game->keys.d = false;
+	if (keycode == KEY_A)
+		game->keys.a = false;
+	if (keycode == KEY_LEFT)
+		game->keys.left = false;
+	if(keycode == KEY_RIGHT)
+		game->keys.right = false;
+	return (0);
+}
+
 int	handle_key_press(int keycode, t_game *game)
 {
 	if (keycode == 65307)
@@ -14,9 +31,17 @@ int	handle_key_press(int keycode, t_game *game)
 		free_game(game);
 		exit(0);
 	}
-	if (keycode == KEY_W || keycode == KEY_S || keycode == KEY_D || keycode == KEY_A)
-		player_movement(game, keycode);
-	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
-		player_rotate(&game->player, keycode);
+	if (keycode == KEY_W)
+		game->keys.w = true;
+	if (keycode == KEY_S)
+		game->keys.s = true;
+	if (keycode == KEY_D)
+		game->keys.d = true;
+	if (keycode == KEY_A)
+		game->keys.a = true;
+	if (keycode == KEY_LEFT)
+		game->keys.left = true;
+	if(keycode == KEY_RIGHT)
+		game->keys.right = true;
 	return (0);
 }

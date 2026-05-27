@@ -16,6 +16,12 @@ void	init_game(t_game *game)
 	game->map_h = 0;
 	game->ceiling_color = 0x0000FF00;
 	game->floor_color = 0x000000FF;
+	game->keys.w = false;
+	game->keys.a = false;
+	game->keys.s = false;
+	game->keys.d = false;
+	game->keys.left = false;
+	game->keys.right = false;
 }
 
 void	rude_parse_map(char *file, t_game *game)

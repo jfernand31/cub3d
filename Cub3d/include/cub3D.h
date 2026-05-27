@@ -15,6 +15,16 @@
 #define KEY_ESC    65307
 
 
+typedef struct s_keys
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+}	t_keys;
+
 typedef struct s_vec2
 {
 	double	x;
@@ -63,6 +73,7 @@ typedef struct	s_game
 	t_ray		ray;
 	int		floor_color;
 	int		ceiling_color;
+	t_keys		keys;
 }	t_game;
 
 //utils
@@ -75,6 +86,7 @@ bool	run_game(t_game *game);
 void	free_game(t_game *game);
 
 //events
+int	handle_key_release(int keycode, t_game *game);
 int	handle_key_press(int keycode, t_game *game);
 int	close_game(t_game *game);
 
@@ -91,8 +103,9 @@ int	render(void *param);
 bool	raycast(char **map, t_player *player, t_data *img);
 
 //movement
-void	player_movement(t_game *game, int keycode);
-void	player_rotate(t_player *player, int keycode);
+void	update_player(t_game *game);
+void	player_movement(t_game *game, t_keys keys);
+void	player_rotate(t_player *player, t_keys keys);
 
 #endif
 
