@@ -1,6 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 # include <stdbool.h>
+#include  <unistd.h>
 
 #define MINIMAP_SCALE 8
 #define TILE_SIZE 32
@@ -13,6 +14,12 @@
 #define KEY_LEFT   65361
 #define KEY_RIGHT  65363
 #define KEY_ESC    65307
+
+//Errors
+# define ARGS   918
+# define FILE   919
+# define MAP    920
+# define MALLOC 921
 
 
 typedef struct s_keys
@@ -106,6 +113,9 @@ bool	raycast(char **map, t_player *player, t_data *img);
 void	update_player(t_game *game);
 void	player_movement(t_game *game, t_keys keys);
 void	player_rotate(t_player *player, t_keys keys);
+
+//errors
+void	error_message(int type);
 
 #endif
 
