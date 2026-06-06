@@ -1,7 +1,4 @@
-#include <stdlib.h>
-#include <unistd.h>
 #include "cub3D.h"
-#include "libft.h"
 
 void	init_game(t_game *game)
 {
@@ -24,6 +21,7 @@ void	init_game(t_game *game)
 	game->keys.right = false;
 }
 
+/*
 void	rude_parse_map(char *file, t_game *game)
 {
 	if (!file)
@@ -60,7 +58,7 @@ void	rude_parse_map(char *file, t_game *game)
 	}	
 	game->map[i] = NULL;
 }
-
+*/
 
 void	free_game(t_game *game)
 {
@@ -78,17 +76,23 @@ void	free_game(t_game *game)
 
 int	main(int argc, char **argv)
 {
+	int		fd;
 	t_game	game;
 
-	(void)argv;
 	if(argc != 2)
 	{
 		ft_printf("Usage is: ./cub3D <map.cub>\n");
 		return (1);
 	}
-
+	check_extension(argv[1]);
 	init_game(&game);
-	rude_parse_map(argv[1], &game);
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (1); //error opening map
+	load_map(argv[1], &game);
+
+
+	//rude_parse_map(argv[1], &game);
 	if (!game.map)
 		return (1);
 	if (!run_game(&game))

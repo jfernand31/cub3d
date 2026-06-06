@@ -2,6 +2,17 @@
 # define CUB3D_H
 # include <stdbool.h>
 #include  <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <X11/keysym.h>
+#include <X11/X.h>
+
+#include "../libs/libft/src/get_next_line/get_next_line.h"
+#include "../libs/minilibx-linux/mlx.h"
+#include "../libs/libft/src/ft_printf/ft_printf.h"
+#include "../libs/libft/include/libft.h"
 
 #define MINIMAP_SCALE 8
 #define TILE_SIZE 32
@@ -116,6 +127,14 @@ void	player_rotate(t_player *player, t_keys keys);
 
 //errors
 void	error_message(int type);
+
+//parsing
+void	check_extension(char *file);
+void	load_map(char *map_file, t_game *game);
+
+//Parsing utils
+int	ft_strcmp(char *s1, char *s2);
+char	*remove_path(char *file);
 
 #endif
 
