@@ -9,9 +9,10 @@
 #include <X11/keysym.h>
 #include <X11/X.h>
 
-#include "../libs/libft/include/libft.h"
 #include "../libs/libft/src/get_next_line/get_next_line.h"
 #include "../libs/minilibx-linux/mlx.h"
+#include "../libs/libft/src/ft_printf/ft_printf.h"
+#include "../libs/libft/include/libft.h"
 
 #define MINIMAP_SCALE 8
 #define TILE_SIZE 32

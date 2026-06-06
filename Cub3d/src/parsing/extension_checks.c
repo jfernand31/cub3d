@@ -1,5 +1,4 @@
 #include "cub3D.h"
-#include "libft.h"
 
 void	check_extension(char *file)
 {

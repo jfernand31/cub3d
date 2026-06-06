@@ -23,6 +23,10 @@ LIB_PATH						=	./libs/libft/
 LIB_NAME						= libft.a
 LIB									= $(LIB_PATH)$(LIB_NAME)
 
+PRINTF_PATH					= ./libs/libft/src/ft_printf/
+PRINTF_NAME					= libftprintf.a
+PRINTF							= $(PRINTF_PATH)$(PRINTF_NAME)
+
 INC_PATH						= ./include/
 
 SRC_PATH						= ./src/
@@ -82,6 +86,7 @@ INC             = -I $(INC_PATH)
 INC							+= -I $(LIB_PATH)
 INC							+= -I $(LIB_PATH)/src/get_next_line/
 INC							+= -I $(MLX_PATH)
+INC							+= -I $(PRINTF_PATH)
 
 # **************************************************************************** #
 #                                   Commands                                   #
@@ -96,6 +101,7 @@ RM              = rm -rf
 all: $(LIB) $(MLX) $(NAME)
 
 $(LIB): 
+	@$(MAKE) -C $(PRINTF_PATH)
 	@$(MAKE) -C $(LIB_PATH)
 
 $(MLX):
@@ -110,7 +116,7 @@ $(OBJS_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(NAME): $(OBJS_DIR) $(OBJS)
-	@$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIB) $(MLX) $(MLXFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIB) $(PRINTF) $(MLX) $(MLXFLAGS) -o $(NAME)
 	@echo "Compilation completed!"
 
 clean:
@@ -121,7 +127,7 @@ clean:
 
 fclean: clean
 	@$(MAKE) fclean -C $(LIB_PATH)
-	@$(MAKE) clean -C $(MLX_PATH)
+##	@$(MAKE) clean -C $(MLX_PATH)
 	@$(RM) $(NAME) $(OBJS_DIR)
 	@echo "Program removed successfully!"
 
