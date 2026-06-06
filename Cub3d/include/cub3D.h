@@ -2,6 +2,16 @@
 # define CUB3D_H
 # include <stdbool.h>
 #include  <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <X11/keysym.h>
+#include <X11/X.h>
+
+#include "../libs/libft/include/libft.h"
+#include "../libs/libft/src/get_next_line/get_next_line.h"
+#include "../libs/minilibx-linux/mlx.h"
 
 #define MINIMAP_SCALE 8
 #define TILE_SIZE 32

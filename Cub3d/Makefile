@@ -96,7 +96,6 @@ RM              = rm -rf
 all: $(LIB) $(MLX) $(NAME)
 
 $(LIB): 
-	@$(MAKE) -C $(PRINTF_PATH)
 	@$(MAKE) -C $(LIB_PATH)
 
 $(MLX):
