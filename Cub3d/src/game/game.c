@@ -1,8 +1,4 @@
-#include "libft.h"
 #include "cub3D.h"
-#include "mlx.h"
-#include <stdbool.h>
-
 
 int	game_loop(t_game *game)
 {

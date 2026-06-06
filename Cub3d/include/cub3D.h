@@ -130,6 +130,7 @@ void	error_message(int type);
 
 //parsing
 void	check_extension(char *file);
+void	load_map(char *map_file, t_game *game);
 
 //Parsing utils
 int	ft_strcmp(char *s1, char *s2);
