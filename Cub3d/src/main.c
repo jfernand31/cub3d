@@ -80,13 +80,12 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	(void)argv;
 	if(argc != 2)
 	{
 		ft_printf("Usage is: ./cub3D <map.cub>\n");
 		return (1);
 	}
-
+	check_extension(av[1]);
 	init_game(&game);
 	rude_parse_map(argv[1], &game);
 	if (!game.map)

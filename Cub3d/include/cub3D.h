@@ -117,5 +117,12 @@ void	player_rotate(t_player *player, t_keys keys);
 //errors
 void	error_message(int type);
 
+//parsing
+void	check_extension(char *file);
+
+//Parsing utils
+int	ft_strcmp(char *s1, char *s2);
+char	*remove_path(char *file);
+
 #endif
 
