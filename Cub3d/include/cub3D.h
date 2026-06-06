@@ -1,6 +1,18 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 # include <stdbool.h>
+#include  <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <X11/keysym.h>
+#include <X11/X.h>
+
+#include "../libs/libft/src/get_next_line/get_next_line.h"
+#include "../libs/minilibx-linux/mlx.h"
+#include "../libs/libft/src/ft_printf/ft_printf.h"
+#include "../libs/libft/include/libft.h"
 
 #define MINIMAP_SCALE 8
 #define TILE_SIZE 32
@@ -13,6 +25,12 @@
 #define KEY_LEFT   65361
 #define KEY_RIGHT  65363
 #define KEY_ESC    65307
+
+//Errors
+# define ARGS   918
+# define FILE   919
+# define MAP    920
+# define MALLOC 921
 
 
 typedef struct s_keys
@@ -106,6 +124,17 @@ bool	raycast(char **map, t_player *player, t_data *img);
 void	update_player(t_game *game);
 void	player_movement(t_game *game, t_keys keys);
 void	player_rotate(t_player *player, t_keys keys);
+
+//errors
+void	error_message(int type);
+
+//parsing
+void	check_extension(char *file);
+void	load_map(char *map_file, t_game *game);
+
+//Parsing utils
+int	ft_strcmp(char *s1, char *s2);
+char	*remove_path(char *file);
 
 #endif
 
