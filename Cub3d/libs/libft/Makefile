@@ -34,7 +34,6 @@ $(NAME): $(OBJS)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@printf "$(YELLOW)Compiling: $< $(DEF_COLOR) \n"
 	@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
 clean:

@@ -15,69 +15,77 @@
 #include "../libs/libft/include/libft.h"
 
 #define MINIMAP_SCALE 8
-#define TILE_SIZE 32
-#define WIDTH 1920
-#define HEIGHT 1080
-#define KEY_W      119
-#define KEY_A      97
-#define KEY_S      115
-#define KEY_D      100
-#define KEY_LEFT   65361
-#define KEY_RIGHT  65363
-#define KEY_ESC    65307
+#define TILE_SIZE	  32
+#define WIDTH		  1920
+#define HEIGHT	      1080
+#define KEY_W         119
+#define KEY_A         97
+#define KEY_S         115
+#define KEY_D		  100
+#define KEY_LEFT	  65361
+#define KEY_RIGHT	  65363
+#define KEY_ESC		  65307
 
 //Errors
-# define ARGS   918
-# define FILE   919
-# define MAP    920
-# define MALLOC 921
+# define ARGS		  918
+# define FILE	      919
+# define MAP          920
+# define MALLOC       921
 
 
 typedef struct s_keys
 {
-	bool	w;
-	bool	a;
-	bool	s;
-	bool	d;
-	bool	left;
-	bool	right;
+	bool		w;
+	bool		a;
+	bool		s;
+	bool		d;
+	bool		left;
+	bool		right;
 }	t_keys;
 
 typedef struct s_vec2
 {
-	double	x;
-	double	y;
+	double		x;
+	double		y;
 }	t_vec2;
 
 typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int	bits_per_pixel;
-	int	line_length;
-	int	endian;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
 }	t_data;
 
 typedef struct s_player
 {
-	t_vec2	pos;
-	t_vec2	dir;
-	t_vec2	plane;
+	t_vec2		pos;
+	t_vec2		dir;
+	t_vec2		plane;
 }	t_player;
 
 typedef struct s_ray
 {
-	double	camera_x;
-	t_vec2	dir;
-	int	map_x;
-	int	map_y;
-	t_vec2	delta_dist;
-	t_vec2	side_dist;
-	int	step_x;
-	int	step_y;
-	int	hit;
-	int	side;
-	double	perp_wall_dist;
+	double		camera_x;
+	t_vec2		dir;
+	int			map_x;
+	int			map_y;
+	t_vec2		delta_dist;
+	t_vec2		side_dist;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
+	double		perp_wall_dist;
 }	t_ray;
+
+typedef struct	s_textures
+{
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
+} t_textures;
 
 typedef struct	s_game
 {
@@ -86,12 +94,13 @@ typedef struct	s_game
 	t_data		img;
 	t_player	player;
 	char		**map;
-	int		map_w;
-	int		map_h;
+	int			map_w;
+	int			map_h;
 	t_ray		ray;
-	int		floor_color;
-	int		ceiling_color;
+	int			floor_color;
+	int			ceiling_color;
 	t_keys		keys;
+	t_textures	textures;
 }	t_game;
 
 //utils
@@ -104,9 +113,9 @@ bool	run_game(t_game *game);
 void	free_game(t_game *game);
 
 //events
-int	handle_key_release(int keycode, t_game *game);
-int	handle_key_press(int keycode, t_game *game);
-int	close_game(t_game *game);
+int		handle_key_release(int keycode, t_game *game);
+int		handle_key_press(int keycode, t_game *game);
+int		close_game(t_game *game);
 
 //render
 void	draw_floor_ceiling(t_data *img, int floor, int ceiling);
@@ -115,7 +124,7 @@ void	draw_minimap(t_data *img, char **map, t_game *game);
 void	draw_square(t_data *img, int x, int y, int color);
 void	draw_square_pixel(t_data *img, int x, int y, int color);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int	render(void *param);
+int		render(void *param);
 
 //raycast
 bool	raycast(char **map, t_player *player, t_data *img);
@@ -130,11 +139,23 @@ void	error_message(int type);
 
 //parsing
 void	check_extension(char *file);
-void	load_map(char *map_file, t_game *game);
+void	parsing(char *map_file, t_game *game);
+void	parse_line(t_game *game, char *line, int fd);
+int		line_type(t_game *game, char *line, int fd);
+int		check_elements(t_game *game);
+int		valid_line(const char *line);
+
+//textures parsing
+int		texture_parser(t_game *game, char *line);
+int		assign_path(char *line, char **path);
+int		path_exists(char *line);
+
 
 //Parsing utils
-int	ft_strcmp(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
 char	*remove_path(char *file);
+int		space_check(char c);
+int		skip_whitespaces(char *line);
 
 #endif
 

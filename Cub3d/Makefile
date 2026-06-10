@@ -48,6 +48,9 @@ GAME_SRC_FILES			= game.c
 PARSING_SRC_PATH		=$(SRC_PATH)parsing/
 
 PARSING_SRC_FILES		= extension_check.c
+PARSING_SRC_FILES		+= parsing.c
+PARSING_SRC_FILES		+= utils_parsing.c
+PARSING_SRC_FILES		+= textures_parsing.c
 
 PLAYER_SRC_PATH			= $(SRC_PATH)player/
 
