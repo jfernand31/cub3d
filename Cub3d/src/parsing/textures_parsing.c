@@ -26,16 +26,14 @@ int	assign_path(char *line, char **path)
 
 	if (!*path)
 	{
-		if (path_exists(line) == -1 || valid_path(line) == -1)
-			return (-1); //error needs handling. path isn't valid.
-		line += 2;
-		if (space_check(*line) == 0)
-			return (-1); //error needs handling. path isn't valid.
-		parsed_line = ft_strtrim(line, " \t\r\n\v\f");
+		parsed_line = extract_path(line);
 		if (!parsed_line)
-			return (-1); //error needs handling. malloc failled.
-		if (*parsed_line == '\0')
-			return (-1); //error needs handling. Missing texture path. must free parsed line.
+			return (-1);
+		if (valid_path(parsed_line) == -1)
+		{
+			free(parsed_line);
+			return (-1);
+		}
 		*path = ft_strdup(parsed_line);
 		free(parsed_line);
 		if (!*path)
@@ -45,51 +43,23 @@ int	assign_path(char *line, char **path)
 	return (-1); //error needs handling. cant duplicate texture.
 }
 
-/*
-	Checks if path exists.
-*/
-
-int	path_exists(char *line)
-{
-	char	*path;
-	char	*parsed_path;
-	int		fd;
-
-	path = line;
-	while (*path && space_check(*path) == 0)
-		path++;
-	while (*path && space_check(*path) == 1)
-		path++;
-	parsed_path = ft_strtrim(line, " \t\r\n\v\f");
-	if (!parsed_path)
-		return (-1); //error needs handling. malloc error. must free parsed_path.
-	fd = open(parsed_path, O_RDONLY);
-	if (fd == -1)
-		return (-1); //error needs handling. error opening fd.must free parsed_path.
-	close(fd);
-	free(parsed_path);
-	return (0);
-}
 
 /*
 	Checks if its a valid .xpm path.
 */
 
-int	valid_path(char *line)
+int	valid_path(char *path)
 {
-	char	*path;
 	int		fd;
 
-	path = extract_path(line);
-	if (!path)
+	if (!path || path[0] == '\0')
 		return (-1);
-	if (path[0] == '\0' || check_xpm_extension(path) == -1)
+	if (check_xpm_extension(path) == -1)
 		return (-1);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	close(fd);
-	free(path);
 	return (0);
 }
 
@@ -101,8 +71,7 @@ char *extract_path(char *line)
 {
 	char *path;
 
-	path = line;
-	path += 2;
+	path = line + 2;
 	if (space_check(*path) == 0)
 		return (NULL); //error needs handling. 
 	path = ft_strtrim(path, " \t\n\v\f");
