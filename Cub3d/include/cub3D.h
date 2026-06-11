@@ -149,6 +149,7 @@ int		valid_line(const char *line);
 int		texture_parser(t_game *game, char *line);
 int		assign_path(char *line, char **path);
 int		path_exists(char *line);
+int		valid_path(char *line);
 
 
 //Parsing utils

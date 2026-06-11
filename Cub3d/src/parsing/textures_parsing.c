@@ -70,3 +70,16 @@ int	path_exists(char *line)
 	free(parsed_path);
 	return (0);
 }
+
+/*
+	Checks if its a valid .xpm path.
+*/
+
+int	valid_path(char *line)
+{
+	char **splitted;
+	
+	if (ft_strchr(line, '.') == NULL)
+		return (-1);
+
+}

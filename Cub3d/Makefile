@@ -35,7 +35,7 @@ SRC_FILES						= main.c
 
 ERRORS_SRC_PATH				= $(SRC_PATH)errors/
 
-ERRORS_SRC_FILES				= handle_map.c
+ERRORS_SRC_FILES				= error_handling.c
 
 EVENTS_SRC_PATH			= $(SRC_PATH)events/
 
@@ -47,7 +47,7 @@ GAME_SRC_FILES			= game.c
 
 PARSING_SRC_PATH		=$(SRC_PATH)parsing/
 
-PARSING_SRC_FILES		= extension_check.c
+PARSING_SRC_FILES		= extension_checks.c
 PARSING_SRC_FILES		+= parsing.c
 PARSING_SRC_FILES		+= utils_parsing.c
 PARSING_SRC_FILES		+= textures_parsing.c

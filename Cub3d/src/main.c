@@ -89,7 +89,7 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (1); //error opening map
-	load_map(argv[1], &game);
+	parsing(argv[1], &game);
 
 
 	//rude_parse_map(argv[1], &game);

@@ -59,7 +59,6 @@ bonus: $(OFILES) $(BOFILES)
 	@ echo 'Finished building Bonus binary: $(NAME)'
 
 $(OFILES): %.o:%.c
-	@ echo 'Building target: $@'
 	@ $(CC) $(CCFLAGS) -c $< -o $@
 
 clean:
