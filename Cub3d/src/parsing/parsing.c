@@ -6,25 +6,25 @@
 	Checks if all the elements exist.
 */
 
-void	parsing(char *map_file, t_game *game)
+int	parsing(char *map_file, t_game *game)
 {
 	int	fd;
 	char *line;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
-		return ;
+		return (-1);
 	line = get_next_line(fd);
 	if (!line)
 	{
 		close(fd);
-		return ; // error needs handling. file empty.
+		return (-1); // error needs handling. file empty.
 	}
 	parse_line(game, line, fd);
 	close(fd);
 	if (check_elements(game))
-		return ;//error needs handling. missing elements.
-	return ;
+		return (-1);//error needs handling. missing elements.
+	return (0);
 }
 
 /*

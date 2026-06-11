@@ -51,6 +51,7 @@ PARSING_SRC_FILES		= extension_checks.c
 PARSING_SRC_FILES		+= parsing.c
 PARSING_SRC_FILES		+= utils_parsing.c
 PARSING_SRC_FILES		+= textures_parsing.c
+PARSING_SRC_FILES		+= color_parsing.c
 
 PLAYER_SRC_PATH			= $(SRC_PATH)player/
 

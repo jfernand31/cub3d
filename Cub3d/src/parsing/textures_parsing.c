@@ -74,7 +74,7 @@ char *extract_path(char *line)
 	path = line + 2;
 	if (space_check(*path) == 0)
 		return (NULL); //error needs handling. 
-	path = ft_strtrim(path, " \t\n\v\f");
+	path = ft_strtrim(path, " \r\t\n\v\f");
 	if (!path)
 		return (NULL); //error needs handling.
 	return (path);

@@ -98,7 +98,9 @@ typedef struct	s_game
 	int			map_h;
 	t_ray		ray;
 	int			floor_color;
+	int			floor_set;
 	int			ceiling_color;
+	int			ceiling_set;
 	t_keys		keys;
 	t_textures	textures;
 }	t_game;
@@ -140,7 +142,7 @@ void	error_message(int type);
 //parsing
 int		check_xpm_extension(char *path);
 int		check_extension(char *file);
-void	parsing(char *map_file, t_game *game);
+int		parsing(char *map_file, t_game *game);
 void	parse_line(t_game *game, char *line, int fd);
 int		line_type(t_game *game, char *line, int fd);
 int		check_elements(t_game *game);
@@ -152,6 +154,11 @@ int		assign_path(char *line, char **path);
 int		valid_path(char *line);
 char	*extract_path(char *line);
 
+//Color parsing
+int		color_parser(t_game *game, char *line);
+int		parse_rgb(char *line);
+int		rgb_value(char **line);
+int		comma_check(char **line);
 
 //Parsing utils
 int		ft_strcmp(char *s1, char *s2);

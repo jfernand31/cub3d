@@ -11,8 +11,10 @@ void	init_game(t_game *game)
 	game->player.plane.y = 0.66;
 	game->map_w = 0;
 	game->map_h = 0;
-	game->ceiling_color = 0x0000FF00;
-	game->floor_color = 0x000000FF;
+	game->ceiling_color = 0;
+	game->floor_color = 0;
+	game->ceiling_set = 0;
+	game->floor_set = 0;
 	game->keys.w = false;
 	game->keys.a = false;
 	game->keys.s = false;
@@ -90,7 +92,8 @@ int	main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 0)
 			return (1); //error opening map
-		parsing(argv[1], &game);
+		if (parsing(argv[1], &game) == -1)
+			return (1); //error in the parsing.
 
 
 		//rude_parse_map(argv[1], &game);
