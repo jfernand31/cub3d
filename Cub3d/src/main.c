@@ -84,21 +84,23 @@ int	main(int argc, char **argv)
 		ft_printf("Usage is: ./cub3D <map.cub>\n");
 		return (1);
 	}
-	check_extension(argv[1]);
-	init_game(&game);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (1); //error opening map
-	parsing(argv[1], &game);
-
-
-	//rude_parse_map(argv[1], &game);
-	if (!game.map)
-		return (1);
-	if (!run_game(&game))
+	if (check_extension(argv[1]) == 0)
 	{
-		free_game(&game);
-		return (1);
+		init_game(&game);
+		fd = open(argv[1], O_RDONLY);
+		if (fd < 0)
+			return (1); //error opening map
+		parsing(argv[1], &game);
+
+
+		//rude_parse_map(argv[1], &game);
+		if (!game.map)
+			return (1);
+		if (!run_game(&game))
+		{
+			free_game(&game);
+			return (1);
+		}
 	}
 	free_game(&game);
 	return (0);

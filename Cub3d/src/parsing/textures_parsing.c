@@ -5,13 +5,13 @@
 */
 int	texture_parser(t_game *game, char *line)
 {
-	if (ft_strncmp(line, "NO", 2) == 0)
+	if (ft_strncmp(line, "NO", 2) == 0 && space_check(line[2]))
 		return (assign_path(line, &game->textures.no_path));
-	if (ft_strncmp(line, "SO", 2) == 0)
+	if (ft_strncmp(line, "SO", 2) == 0 && space_check(line[2]))
 		return (assign_path(line, &game->textures.so_path));
-	if (ft_strncmp(line, "EA", 2) == 0)
+	if (ft_strncmp(line, "EA", 2) == 0 && space_check(line[2]))
 		return (assign_path(line, &game->textures.ea_path));
-	if (ft_strncmp(line, "WE", 2) == 0)
+	if (ft_strncmp(line, "WE", 2) == 0 && space_check(line[2]))
 		return (assign_path(line, &game->textures.we_path));
 	else
 		return (-1); //error needs handling. unknown texture.
@@ -77,9 +77,36 @@ int	path_exists(char *line)
 
 int	valid_path(char *line)
 {
-	char **splitted;
-	
-	if (ft_strchr(line, '.') == NULL)
-		return (-1);
+	char	*path;
+	int		fd;
 
+	path = extract_path(line);
+	if (!path)
+		return (-1);
+	if (path[0] == '\0' || check_xpm_extension(path) == -1)
+		return (-1);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (-1);
+	close(fd);
+	free(path);
+	return (0);
+}
+
+/*
+	Extract path.
+*/
+
+char *extract_path(char *line)
+{
+	char *path;
+
+	path = line;
+	path += 2;
+	if (space_check(*path) == 0)
+		return (NULL); //error needs handling. 
+	path = ft_strtrim(path, " \t\n\v\f");
+	if (!path)
+		return (NULL); //error needs handling.
+	return (path);
 }

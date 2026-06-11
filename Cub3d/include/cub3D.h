@@ -138,7 +138,8 @@ void	player_rotate(t_player *player, t_keys keys);
 void	error_message(int type);
 
 //parsing
-void	check_extension(char *file);
+int		check_xpm_extension(char *path);
+int		check_extension(char *file);
 void	parsing(char *map_file, t_game *game);
 void	parse_line(t_game *game, char *line, int fd);
 int		line_type(t_game *game, char *line, int fd);
@@ -150,6 +151,7 @@ int		texture_parser(t_game *game, char *line);
 int		assign_path(char *line, char **path);
 int		path_exists(char *line);
 int		valid_path(char *line);
+char	*extract_path(char *line);
 
 
 //Parsing utils
