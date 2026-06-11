@@ -47,7 +47,7 @@ int	parse_rgb(char *line)
 	if (g == -1 || comma_check(&line) == -1)
 		return (-1);
 	b = rgb_value(&line);
-	if (b == -1 || comma_check(&line) == -1)
+	if (b == -1) 
 		return (-1);
 	skip_whitespaces_ptr(&line);
 	if (*line != '\0' && *line != '\n')
@@ -72,11 +72,7 @@ int	rgb_value(char **line)
 
 int	comma_check(char **line)
 {
-	int	i;
-
-	i = skip_whitespaces(*line);
-	if (i > 0)
-		*line += i;
+	skip_whitespaces_ptr(line);
 	if (**line != ',')
 		return (-1); //error needs handling. invalid color format. comma missing.
 	(*line)++;
