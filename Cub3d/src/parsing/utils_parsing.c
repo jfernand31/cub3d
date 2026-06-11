@@ -26,3 +26,12 @@ int	skip_whitespaces(char *line)
 	}
 	return (-1);
 }
+
+void	skip_whitespaces_ptr(char **line)
+{
+	int	i;
+
+	i = skip_whitespaces(*line);
+	if (i > 0)
+		*line += 1;
+}

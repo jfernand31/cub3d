@@ -165,6 +165,7 @@ int		ft_strcmp(char *s1, char *s2);
 char	*remove_path(char *file);
 int		space_check(char c);
 int		skip_whitespaces(char *line);
+void	skip_whitespaces_ptr(char **line);
 
 #endif
 
