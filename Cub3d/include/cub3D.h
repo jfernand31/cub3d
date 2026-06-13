@@ -162,6 +162,10 @@ int		comma_check(char **line);
 
 //Map parsing
 int		parser_map(t_game *game, int fd, char *first_row);
+int		add_line(t_list **map_list, char *line, t_game *game);
+char	*replace_spaces(char *line);
+int		read_all(int fd, t_list **map, t_game *game);
+int		copy_list(t_game *game, t_list *list);
 
 //Parsing utils
 int		ft_strcmp(char *s1, char *s2);
@@ -169,6 +173,7 @@ char	*remove_path(char *file);
 int		space_check(char c);
 int		skip_whitespaces(char *line);
 void	skip_whitespaces_ptr(char **line);
+int		max_width(int a, int b);
 
 #endif
 
