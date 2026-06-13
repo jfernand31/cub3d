@@ -160,6 +160,9 @@ int		parse_rgb(char *line);
 int		rgb_value(char **line);
 int		comma_check(char **line);
 
+//Map parsing
+int		parser_map(t_game *game, int fd, char *first_row);
+
 //Parsing utils
 int		ft_strcmp(char *s1, char *s2);
 char	*remove_path(char *file);
