@@ -166,6 +166,10 @@ int		add_line(t_list **map_list, char *line, t_game *game);
 char	*replace_spaces(char *line);
 int		read_all(int fd, t_list **map, t_game *game);
 int		copy_list(t_game *game, t_list *list);
+void	normalize_map(char *dest, char *src, int w);
+
+//Map validation
+int		validate_map(t_game *game);
 
 //Parsing utils
 int		ft_strcmp(char *s1, char *s2);

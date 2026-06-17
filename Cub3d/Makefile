@@ -53,6 +53,8 @@ PARSING_SRC_FILES		+= utils_parsing.c
 PARSING_SRC_FILES		+= textures_parsing.c
 PARSING_SRC_FILES		+= color_parsing.c
 PARSING_SRC_FILES		+= map_parsing.c
+PARSING_SRC_FILES		+= utils_map.c
+PARSING_SRC_FILES		+= map_validation.c
 
 PLAYER_SRC_PATH			= $(SRC_PATH)player/
 

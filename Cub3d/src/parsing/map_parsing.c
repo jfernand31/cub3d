@@ -5,7 +5,7 @@ int	parser_map(t_game *game, int fd, char *first_line)
 	t_list	*map_list;
 
 	map_list = NULL;
-	game->map_w = ft_strlen(first_line);
+	game->map_w = 0;
 	if (add_line(&map_list, first_line, game) == -1)
 		return (-1); //error needs handling.
 	if (read_all(fd, &map_list, game) == -1)
@@ -13,7 +13,9 @@ int	parser_map(t_game *game, int fd, char *first_line)
 	game->map_h = ft_lstsize(map_list);
 	if (copy_list(game, map_list) == -1)
 		return (ft_lstclear(&map_list, free), -1); //error needs handling.
-	///........	
+	ft_lstclear(&map_list, free);
+	if (validate_map(game) == -1)
+		return (-1); //error needs handling.
 	return (0);
 }
 
@@ -78,6 +80,33 @@ int	read_all(int fd, t_list **map, t_game *game)
 		if (add_line(map, line, game) == -1)
 			return (-1); //error needs handling.
 		line = get_next_line(fd);
+	}
+	return (0);
+}
+
+int	copy_list(t_game *game, t_list *list)
+{
+	t_list	*node;
+	int		y;
+
+	y = 0;
+	game->map = (char **)malloc(sizeof(char *) * (game->map_h + 1));
+	if (!game->map)
+		return (-1); //error needs handling.
+	node = list;
+	while (node)
+	{
+		game->map[y] = (char *)malloc(sizeof(char *) * (game->map_w + 1));
+		if (!game->map[y])
+		{
+			while (y > 0)
+				free(game->map[--y]);
+			free(game->map);
+			return (-1);
+		}
+		normalize_map(game->map[y], (char *)node->content, game->map_w);
+		y++;
+		node = node->next;
 	}
 	return (0);
 }

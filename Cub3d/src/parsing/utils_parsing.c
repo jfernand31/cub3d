@@ -35,10 +35,3 @@ void	skip_whitespaces_ptr(char **line)
 	if (i > 0)
 		*line += 1;
 }
-
-int	max_width(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
