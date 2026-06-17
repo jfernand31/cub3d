@@ -21,6 +21,10 @@ void	init_game(t_game *game)
 	game->keys.d = false;
 	game->keys.left = false;
 	game->keys.right = false;
+	game->textures.ea_path = NULL;
+	game->textures.we_path = NULL;
+	game->textures.no_path = NULL;
+	game->textures.so_path = NULL;
 }
 
 

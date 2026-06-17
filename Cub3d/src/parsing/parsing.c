@@ -68,17 +68,26 @@ int		line_type(t_game *game, char *line, int fd)
 	if (i == -1 || !line[i])
 		return (0);
 	if (ft_strchr("FC", line[i]))
-		color_parser(game, line + i); //missing
+	{
+		printf("entered color parser");
+		return (color_parser(game, line + i)); 
+	}
 	else if (ft_strchr("NSWE", line[i]))
-		texture_parser(game, line + i); //missing
+	{
+		printf("entered texture parser");
+		return (texture_parser(game, line + i));
+	}
 	else if (line[i] == '1')
 	{
-		if (check_elements(game))
+		printf("entered map parser in line type");
+		if (check_elements(game) == -1)
 			return (-1); //error needs handling. map has to be the last element.
-		if (!valid_line(line))
+		//printf()
+		if (valid_line(line) == -1)
 			return (-1);
-		if (!parser_map(game, fd, line))
+		if (parser_map(game, fd, line) == -1)
 			return (-1);
+		//return (1);
 	}
 	return (0);
 }
@@ -90,17 +99,17 @@ int		line_type(t_game *game, char *line, int fd)
 int	check_elements(t_game *game)
 {
 	if (!game->ceiling_color)
-		return (1);
+		return (-1);
 	else if (!game->floor_color)
-		return (1);
+		return (-1);
 	else if(!game->textures.ea_path)
-			return (1);
+			return (-1);
 	else if(!game->textures.we_path)
-			return (1);
+			return (-1);
 	else if(!game->textures.so_path)
-			return (1);
+			return (-1);
 	else if(!game->textures.no_path)
-			return (1);
+			return (-1);
 	else
 		return (0);
 }
@@ -117,16 +126,16 @@ int	valid_line(const char *line)
 	i = 0;
 	element_found = 0;
 	if (!line || line[0] == '\0')
-		return (1);
+		return (-1);
 	while (line[i])
 	{
 		if (!ft_strchr(" 01NSWE", line[i]))
-			return (1);
+			return (-1);
 		if (ft_strchr("01NSWE", line[i]))
 			element_found = 1;
 		i++;
 	}
 	if (element_found == 0)
-		return (1);
+		return (-1);
 	return (0);
 }

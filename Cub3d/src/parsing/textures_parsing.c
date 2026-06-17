@@ -7,11 +7,11 @@ int	texture_parser(t_game *game, char *line)
 {
 	if (ft_strncmp(line, "NO", 2) == 0 && space_check(line[2]))
 		return (assign_path(line, &game->textures.no_path));
-	if (ft_strncmp(line, "SO", 2) == 0 && space_check(line[2]))
+	else if (ft_strncmp(line, "SO", 2) == 0 && space_check(line[2]))
 		return (assign_path(line, &game->textures.so_path));
-	if (ft_strncmp(line, "EA", 2) == 0 && space_check(line[2]))
+	else if (ft_strncmp(line, "EA", 2) == 0 && space_check(line[2]))
 		return (assign_path(line, &game->textures.ea_path));
-	if (ft_strncmp(line, "WE", 2) == 0 && space_check(line[2]))
+	else if (ft_strncmp(line, "WE", 2) == 0 && space_check(line[2]))
 		return (assign_path(line, &game->textures.we_path));
 	else
 		return (-1); //error needs handling. unknown texture.
