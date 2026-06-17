@@ -170,6 +170,10 @@ void	normalize_map(char *dest, char *src, int w);
 
 //Map validation
 int		validate_map(t_game *game);
+void	set_start(t_game *game, int y, int x);
+void	set_direction(t_game *game, int y, int x);
+int		walkable_check(char c);
+int		surrounding_check(t_game *game, int y, int x);
 
 //Parsing utils
 int		ft_strcmp(char *s1, char *s2);
