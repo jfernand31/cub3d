@@ -23,44 +23,6 @@ void	init_game(t_game *game)
 	game->keys.right = false;
 }
 
-/*
-void	rude_parse_map(char *file, t_game *game)
-{
-	if (!file)
-		return ;
-
-	int fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return ;
-	
-	int	i = 0;
-	char	*line = get_next_line(fd);
-	game->map_w = ft_strlen(line);
-	while (line)
-	{
-		i++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	game->map_h = i;
-	game->map = (char **)ft_calloc(game->map_h + 1, sizeof(char *));
-	close(fd);
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return ;
-	i = 0;
-	line = get_next_line(fd);
-	while (line)
-	{
-		line[ft_strlen(line) - 1] = '\0';
-		game->map[i] = ft_strdup(line);
-		i++;
-		free(line);
-		line = get_next_line(fd);
-	}	
-	game->map[i] = NULL;
-}
-*/
 
 void	free_game(t_game *game)
 {
@@ -73,6 +35,21 @@ void	free_game(t_game *game)
 			free(game->map[i]);
 			i++;
 		}
+	}
+}
+
+static void print_map(t_game *game)
+{
+	int i = 0;
+
+	printf("Map size: %d x %d\n", game->map_w, game->map_h);
+	printf("Floor color: %d\n", game->floor_color);
+	printf("Ceiling color: %d\n", game->ceiling_color);
+
+	while (game->map[i])
+	{
+		printf("%s\n", game->map[i]);
+		i++;
 	}
 }
 
@@ -99,11 +76,12 @@ int	main(int argc, char **argv)
 		//rude_parse_map(argv[1], &game);
 		if (!game.map)
 			return (1);
-		if (!run_game(&game))
-		{
-			free_game(&game);
-			return (1);
-		}
+//		if (!run_game(&game))
+//		{
+//			free_game(&game);
+//			return (1);
+//		}
+		print_map(&game);
 	}
 	free_game(&game);
 	return (0);
