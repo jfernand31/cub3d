@@ -9,7 +9,7 @@ int	parser_map(t_game *game, int fd, char *first_line)
 	if (add_line(&map_list, first_line, game) == -1)
 		return (-1); //error needs handling.
 	if (read_all(fd, &map_list, game) == -1)
-		return (-1); //error needs handling.
+		return (ft_lstclear(&map_list, free), -1); //error needs handling.
 	game->map_h = ft_lstsize(map_list);
 	if (copy_list(game, map_list) == -1)
 		return (ft_lstclear(&map_list, free), -1); //error needs handling.
@@ -25,9 +25,9 @@ int	add_line(t_list **map_list, char *line, t_game *game)
 	t_list	*new_node;
 
 	parsed_line = replace_spaces(line);
+	free(line);
 	if (!parsed_line)
 		return (-1);
-	free(line);
 	if (parsed_line[0] == '\0')
 	{
 		ft_lstclear(map_list, free);

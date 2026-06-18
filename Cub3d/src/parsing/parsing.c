@@ -21,10 +21,7 @@ int	parsing(char *map_file, t_game *game)
 		return (-1); // error needs handling. file empty.
 	}
 	if (parse_line(game, line, fd) == -1)
-	{
-		close(fd);
 		return (-1);
-	}
 	close(fd);
 	if (check_elements(game))
 		return (-1);//error needs handling. missing elements.
@@ -47,11 +44,19 @@ int	parse_line(t_game *game, char *line, int fd)
 		ret = line_type(game, parsed_line, fd);
 		if (ret)
 		{
+			if (ret < 0)
+			{
 			//if(parsed_line)
 			//`	free(parsed_line);
-			if (ret == -1)
-			{
-				clean_gnl(game ,fd);
+			//if (ret == -1)
+			//{
+		//		clean_gnl(game ,fd);
+		//		return (-1);
+		//	}
+			//	break ;
+				if (ret == -1)
+					free(parsed_line);
+				finish_reading(fd);
 				return (-1);
 			}
 			break ;
@@ -91,7 +96,7 @@ int		line_type(t_game *game, char *line, int fd)
 		if (valid_line(line) == -1)
 			return (-1);
 		if (parser_map(game, fd, line) == -1)
-			return (-1);
+			return (-2);
 
 		return (1);
 	}
