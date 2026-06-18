@@ -12,3 +12,10 @@ void	error_message(int type)
 		write (2, "Error\nMalloc failed\n", 20);
 	return ;
 }
+
+int	error_exit(t_game *game, int type)
+{
+	error_message(type);
+	free_game(game);
+	return (-1);
+}

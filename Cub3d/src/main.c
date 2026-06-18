@@ -25,23 +25,13 @@ void	init_game(t_game *game)
 	game->textures.we_path = NULL;
 	game->textures.no_path = NULL;
 	game->textures.so_path = NULL;
+	game->mlx = NULL;
+	game->win = NULL;
+	game->img.img = NULL;
+	game->img.addr = NULL;
 }
 
-
-void	free_game(t_game *game)
-{
-	
-	if (game->map)
-	{
-		int i = 0;
-		while (i < game->map_h)
-		{
-			free(game->map[i]);
-			i++;
-		}
-	}
-}
-
+/*
 static void print_map(t_game *game)
 {
 	int i = 0;
@@ -56,7 +46,7 @@ static void print_map(t_game *game)
 		i++;
 	}
 }
-
+*/
 int	main(int argc, char **argv)
 {
 	int		fd;
@@ -64,28 +54,27 @@ int	main(int argc, char **argv)
 
 	if(argc != 2)
 	{
-		ft_printf("Usage is: ./cub3D <map.cub>\n");
+		error_message(ARGS);
 		return (1);
 	}
-	if (check_extension(argv[1]) == 0)
+	init_game(&game);
+	if (check_extension(argv[1]) == -1)
+		return (error_exit(&game, ARGS), 1);
+	else
 	{
-		init_game(&game);
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 0)
-			return (1); //error opening map
+			return (error_exit(&game, FILE), 1);
+		close(fd);
 		if (parsing(argv[1], &game) == -1)
-			return (1); //error in the parsing.
-
-printf("parsing worked!");
-		//rude_parse_map(argv[1], &game);
+			return (error_exit(&game, MAP), 1);
 		if (!game.map)
-			return (1);
+			return (error_exit(&game, MAP), 1);
 //		if (!run_game(&game))
 //		{
 //			free_game(&game);
 //			return (1);
 //		}
-		print_map(&game);
 	}
 	free_game(&game);
 	return (0);

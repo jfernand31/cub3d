@@ -36,6 +36,8 @@ SRC_FILES						= main.c
 ERRORS_SRC_PATH				= $(SRC_PATH)errors/
 
 ERRORS_SRC_FILES				= error_handling.c
+ERRORS_SRC_FILES				+= free_functions.c
+ERRORS_SRC_FILES				+= clean_gnl.c
 
 EVENTS_SRC_PATH			= $(SRC_PATH)events/
 

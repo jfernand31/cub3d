@@ -96,7 +96,7 @@ int	copy_list(t_game *game, t_list *list)
 	node = list;
 	while (node)
 	{
-		game->map[y] = (char *)malloc(sizeof(char *) * (game->map_w + 1));
+		game->map[y] = (char *)malloc(sizeof(char) * (game->map_w + 1));
 		if (!game->map[y])
 		{
 			while (y > 0)
@@ -108,5 +108,6 @@ int	copy_list(t_game *game, t_list *list)
 		y++;
 		node = node->next;
 	}
+	game->map[y] = NULL;
 	return (0);
 }

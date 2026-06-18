@@ -20,7 +20,11 @@ int	parsing(char *map_file, t_game *game)
 		close(fd);
 		return (-1); // error needs handling. file empty.
 	}
-	parse_line(game, line, fd);
+	if (parse_line(game, line, fd) == -1)
+	{
+		close(fd);
+		return (-1);
+	}
 	close(fd);
 	if (check_elements(game))
 		return (-1);//error needs handling. missing elements.
@@ -31,7 +35,7 @@ int	parsing(char *map_file, t_game *game)
 	Reads the file line by line until it finds the map or an error.
 */
 
-void	parse_line(t_game *game, char *line, int fd)
+int	parse_line(t_game *game, char *line, int fd)
 {
 	char	*parsed_line;
 	int		ret;
@@ -44,8 +48,10 @@ void	parse_line(t_game *game, char *line, int fd)
 		if (ret)
 		{
 			if (ret == -1)
-				return ;//clean remaining gnl buffer and stop
-			//free(parsed_line);
+			{
+				clean_gnl(game ,fd);
+				return (-1);
+			}
 			break ;
 		}
 		else
@@ -54,6 +60,7 @@ void	parse_line(t_game *game, char *line, int fd)
 			line = get_next_line(fd);
 		}
 	}
+	return (0);
 }
 
 /*
@@ -84,9 +91,10 @@ int		line_type(t_game *game, char *line, int fd)
 		if (parser_map(game, fd, line) == -1)
 			return (-1);
 
-		//return (1);
+		return (1);
 	}
-	return (1);
+
+	return (-1);
 }
 
 /*

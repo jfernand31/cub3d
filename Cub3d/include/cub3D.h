@@ -136,14 +136,20 @@ void	update_player(t_game *game);
 void	player_movement(t_game *game, t_keys keys);
 void	player_rotate(t_player *player, t_keys keys);
 
-//errors
+//errors and free
+int		error_exit(t_game *game, int type);
+void	free_map(char **map, int map_h);
 void	error_message(int type);
+void	free_textures(t_textures *textures);
+void	free_game(t_game *game);
+void	clean_gnl(t_game *game, int fd);
+void	finish_reading(int fd);
 
 //parsing
 int		check_xpm_extension(char *path);
 int		check_extension(char *file);
 int		parsing(char *map_file, t_game *game);
-void	parse_line(t_game *game, char *line, int fd);
+int		parse_line(t_game *game, char *line, int fd);
 int		line_type(t_game *game, char *line, int fd);
 int		check_elements(t_game *game);
 int		valid_line(const char *line);
