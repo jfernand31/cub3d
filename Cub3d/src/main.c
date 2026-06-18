@@ -76,7 +76,7 @@ int	main(int argc, char **argv)
 		if (parsing(argv[1], &game) == -1)
 			return (1); //error in the parsing.
 
-
+printf("parsing worked!");
 		//rude_parse_map(argv[1], &game);
 		if (!game.map)
 			return (1);
