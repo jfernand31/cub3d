@@ -47,6 +47,8 @@ int	parse_line(t_game *game, char *line, int fd)
 		ret = line_type(game, parsed_line, fd);
 		if (ret)
 		{
+			//if(parsed_line)
+			//`	free(parsed_line);
 			if (ret == -1)
 			{
 				clean_gnl(game ,fd);
