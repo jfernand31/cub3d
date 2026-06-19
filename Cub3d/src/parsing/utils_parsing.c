@@ -33,5 +33,21 @@ void	skip_whitespaces_ptr(char **line)
 
 	i = skip_whitespaces(*line);
 	if (i > 0)
-		*line += 1;
+		*line += i;
+}
+
+int	read_empty_line(int fd, char *line)
+{
+	while (line)
+	{
+		if (skip_whitespaces(line) != -1)
+		{
+			free(line);
+			finish_reading(fd);
+			return (-1);
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (0);
 }

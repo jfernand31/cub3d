@@ -39,7 +39,7 @@ int	parse_line(t_game *game, char *line, int fd)
 
 	while (line)
 	{
-		parsed_line = ft_strtrim(line, "\n\r");
+		parsed_line = ft_strtrim(line, "\t\v\f\n\r");
 		free(line);
 		ret = line_type(game, parsed_line, fd);
 		if (ret)

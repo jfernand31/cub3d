@@ -31,22 +31,6 @@ void	init_game(t_game *game)
 	game->img.addr = NULL;
 }
 
-/*
-static void print_map(t_game *game)
-{
-	int i = 0;
-
-	printf("Map size: %d x %d\n", game->map_w, game->map_h);
-	printf("Floor color: %d\n", game->floor_color);
-	printf("Ceiling color: %d\n", game->ceiling_color);
-
-	while (game->map[i])
-	{
-		printf("%s\n", game->map[i]);
-		i++;
-	}
-}
-*/
 int	main(int argc, char **argv)
 {
 	int		fd;

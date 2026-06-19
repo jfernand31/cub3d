@@ -188,6 +188,7 @@ int		space_check(char c);
 int		skip_whitespaces(char *line);
 void	skip_whitespaces_ptr(char **line);
 int		max_width(int a, int b);
+int		read_empty_line(int fd, char *line);
 
 #endif
 
