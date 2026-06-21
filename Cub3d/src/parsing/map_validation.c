@@ -48,30 +48,22 @@ void	set_start(t_game *game, int y, int x)
 
 int	surrounding_check(t_game *game, int y, int x)
 {
-	int	row_step;
-	int	col_step;
-	int	adj_row;
-	int	adj_col;
+	if (adjacent_check(game, y - 1, x) == -1)
+		return (-1);
+	if (adjacent_check(game, y + 1, x) == -1)
+		return (-1);
+	if (adjacent_check(game, y, x - 1) == -1)
+		return (-1);
+	if (adjacent_check(game, y, x + 1) == -1)
+		return (-1);
+	return (0);
+}
 
-	row_step = -1;
-	while (row_step <= 1)
-	{
-		col_step = -1;
-		while (col_step <= 1)
-		{
-			if (row_step != 0 || col_step != 0)
-			{
-				adj_row = y + row_step;
-				adj_col = x + col_step;
-				if (adj_row < 0 || adj_row >= game->map_h ||
-					adj_col < 0 || adj_col >= game->map_w)
-					return (-1);
-				if (game->map[adj_row][adj_col] == 'X')
-					return (-1);
-			}
-			col_step++;
-		}
-		row_step++;
-	}
+int	adjacent_check(t_game *game, int y, int x)
+{
+	if (y < 0 || y >= game->map_h || x < 0 || x >= game->map_w)
+		return (-1);
+	if (game->map[y][x] == 'X')
+		return (-1);
 	return (0);
 }
