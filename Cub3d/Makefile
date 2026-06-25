@@ -89,7 +89,9 @@ OBJS								= $(patsubst %.c, $(OBJS_DIR)/%.o, $(SRC))
 # **************************************************************************** #
 
 CC              = cc
-CFLAGS          = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g \
+          -Wno-incompatible-pointer-types \
+          -Wno-cast-function-type
 MLXFLAGS				= -L $(MLX_PATH) -lm -lmlx -Ilmlx -lXext -lX11
 INC             = -I $(INC_PATH)
 INC							+= -I $(LIB_PATH)
@@ -114,7 +116,7 @@ $(LIB):
 	@$(MAKE) -C $(LIB_PATH)
 
 $(MLX):
-	@$(MAKE) -C $(MLX_PATH)
+	@$(MAKE) -C $(MLX_PATH) -f Makefile.mk
 
 $(OBJS_DIR):
 	@mkdir -p Obj
