@@ -11,67 +11,24 @@ void	init_game(t_game *game)
 	game->player.plane.y = 0.66;
 	game->map_w = 0;
 	game->map_h = 0;
-	game->ceiling_color = 0x0000FF00;
-	game->floor_color = 0x000000FF;
+	game->ceiling_color = 0;
+	game->floor_color = 0;
+	game->ceiling_set = 0;
+	game->floor_set = 0;
 	game->keys.w = false;
 	game->keys.a = false;
 	game->keys.s = false;
 	game->keys.d = false;
 	game->keys.left = false;
 	game->keys.right = false;
-}
-
-/*
-void	rude_parse_map(char *file, t_game *game)
-{
-	if (!file)
-		return ;
-
-	int fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return ;
-	
-	int	i = 0;
-	char	*line = get_next_line(fd);
-	game->map_w = ft_strlen(line);
-	while (line)
-	{
-		i++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	game->map_h = i;
-	game->map = (char **)ft_calloc(game->map_h + 1, sizeof(char *));
-	close(fd);
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return ;
-	i = 0;
-	line = get_next_line(fd);
-	while (line)
-	{
-		line[ft_strlen(line) - 1] = '\0';
-		game->map[i] = ft_strdup(line);
-		i++;
-		free(line);
-		line = get_next_line(fd);
-	}	
-	game->map[i] = NULL;
-}
-*/
-
-void	free_game(t_game *game)
-{
-	
-	if (game->map)
-	{
-		int i = 0;
-		while (i < game->map_h)
-		{
-			free(game->map[i]);
-			i++;
-		}
-	}
+	game->textures.ea_path = NULL;
+	game->textures.we_path = NULL;
+	game->textures.no_path = NULL;
+	game->textures.so_path = NULL;
+	game->mlx = NULL;
+	game->win = NULL;
+	game->img.img = NULL;
+	game->img.addr = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -81,24 +38,27 @@ int	main(int argc, char **argv)
 
 	if(argc != 2)
 	{
-		ft_printf("Usage is: ./cub3D <map.cub>\n");
+		error_message(ARGS);
 		return (1);
 	}
-	check_extension(argv[1]);
 	init_game(&game);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (1); //error opening map
-	load_map(argv[1], &game);
-
-
-	//rude_parse_map(argv[1], &game);
-	if (!game.map)
-		return (1);
-	if (!run_game(&game))
+	if (check_extension(argv[1]) == -1)
+		return (error_exit(&game, ARGS), 1);
+	else
 	{
-		free_game(&game);
-		return (1);
+		fd = open(argv[1], O_RDONLY);
+		if (fd < 0)
+			return (error_exit(&game, FILE), 1);
+		close(fd);
+		if (parsing(argv[1], &game) == -1)
+			return (error_exit(&game, MAP), 1);
+		if (!game.map)
+			return (error_exit(&game, MAP), 1);
+//		if (!run_game(&game))
+//		{
+//			free_game(&game);
+//			return (1);
+//		}
 	}
 	free_game(&game);
 	return (0);

@@ -23,6 +23,7 @@ typedef struct s_list
 }	t_list;
 
 // convert
+int		ft_atoi(const char *nptr);
 int		ft_safe_atoi(const char *str, int *out);
 char	*ft_itoa(int n);
 int		ft_tolower(int c);
