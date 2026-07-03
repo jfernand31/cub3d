@@ -6,6 +6,7 @@
 	Checks if all the elements exist.
 */
 
+
 int	parsing(char *map_file, t_game *game)
 {
 	int	fd;
