@@ -30,6 +30,17 @@ void	init_game(t_game *game)
 	game->img.img = NULL;
 	game->img.addr = NULL;
 }
+static void	print_char_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i] != NULL)
+	{
+		printf("%s\n", array[i]);
+		i++;
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -54,6 +65,8 @@ int	main(int argc, char **argv)
 			return (error_exit(&game, MAP), 1);
 		if (!game.map)
 			return (error_exit(&game, MAP), 1);
+		print_char_array(game.map);
+
 //		if (!run_game(&game))
 //		{
 //			free_game(&game);

@@ -38,7 +38,7 @@ void	set_start(t_game *game, int y, int x)
 	game->player.pos.x = x * TILE_SIZE + TILE_SIZE / 2.0;
 	game->player.pos.y = y * TILE_SIZE + TILE_SIZE / 2.0;
 	set_direction(game, y, x);
-	//game->map[y][x] = '0'; (not sure)
+	game->map[y][x] = '0';
 }
 
 /* -1  (one row above / one column left)
