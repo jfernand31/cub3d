@@ -20,10 +20,9 @@ int	render(void *param)
 	draw_floor_ceiling(&game->img,
 		game->floor_color,
 		game->ceiling_color);
+	raycast(game, game->map, &game->player, &game->img);
 	draw_minimap(&game->img, game->map, game);
-	raycast(game->map, &game->player, &game->img);
 	draw_player(&game->img, &game->player);
-
 	mlx_put_image_to_window(
 		game->mlx,
 		game->win,

@@ -32,21 +32,29 @@ void	set_direction(t_game *game, int y, int x)
 	{
 		game->player.dir.x = 0;
 		game->player.dir.y = -1;
+		game->player.plane.x = 0.66;
+		game->player.plane.y = 0;
 	}
 	else if (game->map[y][x] == 'S')
 	{
 		game->player.dir.x = 0;
 		game->player.dir.y = 1;
+		game->player.plane.x = -0.66;
+		game->player.plane.y = 0;
 	}
 	else if (game->map[y][x] == 'W')
 	{
 		game->player.dir.x = -1;
 		game->player.dir.y = 0;
+		game->player.plane.x = 0;
+		game->player.plane.y = -0.66;
 	}
 	else
 	{
 		game->player.dir.x = 1;
 		game->player.dir.y = 0;
+		game->player.plane.x = 0;
+		game->player.plane.y = 0.66;
 	}
 }
 

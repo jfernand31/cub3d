@@ -71,6 +71,7 @@ RENDER_SRC_PATH			= $(SRC_PATH)render/
 
 RENDER_SRC_FILES		= draw.c
 RENDER_SRC_FILES		+= render.c
+RENDER_SRC_FILES		+= load_textures.c
 
 SRC									= $(addprefix $(SRC_PATH), $(SRC_FILES))
 SRC									+= $(addprefix $(ERRORS_SRC_PATH), $(ERRORS_SRC_FILES))

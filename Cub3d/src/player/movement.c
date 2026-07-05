@@ -11,9 +11,11 @@ static void	try_move(t_game *g, t_vec2 move)
 	t_player	*p;
 
 	p = &g->player;
-	if (g->map[(int)p->pos.y][(int)(p->pos.x + move.x)] != '1')
+	if (g->map[(int)p->pos.y][(int)(p->pos.x + move.x)] != '1'
+		&& g->map[(int)p->pos.y][(int)(p->pos.x + move.x)] != 'X')
 		p->pos.x += move.x;
-	if (g->map[(int)(p->pos.y + move.y)][(int)p->pos.x] != '1')
+	if (g->map[(int)(p->pos.y + move.y)][(int)p->pos.x] != '1'
+		&& g->map[(int)(p->pos.y + move.y)][(int)p->pos.x] != 'X')
 		p->pos.y += move.y;
 }
 

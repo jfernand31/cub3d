@@ -57,6 +57,18 @@ typedef struct	s_data {
 	int			endian;
 }	t_data;
 
+typedef struct s_draw
+{
+	int	y;
+	int	color;
+	int	*data;
+	int	tex_x;
+	int	tex_y;
+	int	start;
+	int	end;
+
+} t_draw;
+
 typedef struct s_player
 {
 	t_vec2		pos;
@@ -77,15 +89,31 @@ typedef struct s_ray
 	int			hit;
 	int			side;
 	double		perp_wall_dist;
+	double		wall_x;
 }	t_ray;
+
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}	t_texture;
 
 typedef struct	s_textures
 {
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
-} t_textures;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	t_texture	no;
+	t_texture	so;
+	t_texture	we;
+	t_texture	ea;
+} 		t_textures;
 
 typedef struct	s_game
 {
@@ -96,7 +124,6 @@ typedef struct	s_game
 	char		**map;
 	int			map_w;
 	int			map_h;
-	t_ray		ray;
 	int			floor_color;
 	int			floor_set;
 	int			ceiling_color;
@@ -112,6 +139,7 @@ t_vec2	vec2_mult(t_vec2 v, float n);
 bool	run_game(t_game *game);
 
 //cleanup
+void	free_loaded_textures(t_game *game);
 void	free_game(t_game *game);
 
 //events
@@ -129,7 +157,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		render(void *param);
 
 //raycast
-bool	raycast(char **map, t_player *player, t_data *img);
+bool	raycast(t_game *game, char **map, t_player *player, t_data *img);
 
 //movement
 void	update_player(t_game *game);
@@ -159,6 +187,8 @@ int		texture_parser(t_game *game, char *line);
 int		assign_path(char *line, char **path);
 int		valid_path(char *line);
 char	*extract_path(char *line);
+bool	load_textures(t_game *game);
+int	texture_pixel(t_texture *tex, int x, int y);
 
 //Color parsing
 int		color_parser(t_game *game, char *line);

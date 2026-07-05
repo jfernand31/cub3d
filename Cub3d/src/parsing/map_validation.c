@@ -35,8 +35,8 @@ int	validate_map(t_game *game)
 
 void	set_start(t_game *game, int y, int x)
 {
-	game->player.pos.x = x * TILE_SIZE + TILE_SIZE / 2.0;
-	game->player.pos.y = y * TILE_SIZE + TILE_SIZE / 2.0;
+	game->player.pos.x = x + 0.5;
+	game->player.pos.y = y + 0.5;
 	set_direction(game, y, x);
 	game->map[y][x] = '0';
 }
