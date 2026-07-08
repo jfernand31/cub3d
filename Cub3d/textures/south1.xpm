@@ -1,5 +1,5 @@
 /* XPM */
-static char *texture[] = {
+static char *_0cf51546f654b2cb8901070eae70ba0IXpAaHL13RHrEv0J[] = {
 /* columns rows colors chars-per-pixel */
 "32 32 7 1 ",
 "  c #18101C",
@@ -10,11 +10,11 @@ static char *texture[] = {
 "+ c #BEC7D2",
 "@ c #E6EBEC",
 /* pixels */
-"X@@@X@@@@@@@+X+@@@@@@@@@@@@@@@@@",
-"X+++X++++++++X++++++++++++++++++",
-"XOXOXX.OOOOO+X.OOOOOOOOO+X.OOOOO",
-"XXOXXX.OOOOO+X.oOXOOOOOO+X.OOOOO",
-"XOOOXX.OOOOO+X.XOOOOOOOO+X.OOOOO",
+"@@@@@@@@@@@@+X+@@@@@@@@@@@@@@@@@",
+"+++++++++++++X++++++++++++++++++",
+"OOOOOX.OOOOO+X.OOOOOOOOO+X.OOOOO",
+"OOOOOX.OOOOO+X.oOXOOOOOO+X.OOOOO",
+"OOOOOX.OOOOO+X.XOOOOOOOO+X.OOOOO",
 "OOOOOX.OOOOO+X.OOOOOOOOO+X.OOOOO",
 "XXXXXX.OOOOO+X.OOOOOOOOO+XXXXXXX",
 ".....X.OOOOO+X.OOOOOOOOO+.......",

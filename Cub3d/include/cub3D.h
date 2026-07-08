@@ -25,6 +25,7 @@
 #define KEY_LEFT	  65361
 #define KEY_RIGHT	  65363
 #define KEY_ESC		  65307
+#define CAMERA_PLANE  0.66
 
 //Errors
 # define ARGS		  918
@@ -125,9 +126,9 @@ typedef struct	s_game
 	int			map_w;
 	int			map_h;
 	int			floor_color;
-	int			floor_set;
+	char		floor_set;
 	int			ceiling_color;
-	int			ceiling_set;
+	char		ceiling_set;
 	t_keys		keys;
 	t_textures	textures;
 }	t_game;
@@ -179,6 +180,7 @@ int		check_extension(char *file);
 int		parsing(char *map_file, t_game *game);
 int		parse_line(t_game *game, char *line, int fd);
 int		line_type(t_game *game, char *line, int fd);
+int		handle_line_result(int ret, char *parsed_line, int fd);
 int		check_elements(t_game *game);
 int		valid_line(const char *line);
 
@@ -192,6 +194,7 @@ int	texture_pixel(t_texture *tex, int x, int y);
 
 //Color parsing
 int		color_parser(t_game *game, char *line);
+int		set_color(int *dst_color, char *dst_set, char *line);
 int		parse_rgb(char *line);
 int		rgb_value(char **line);
 int		comma_check(char **line);
@@ -206,8 +209,10 @@ void	normalize_map(char *dest, char *src, int w);
 
 //Map validation
 int		validate_map(t_game *game);
+int	validate_tile(t_game *game, int y, int x, int *player);
 void	set_start(t_game *game, int y, int x);
 void	set_direction(t_game *game, int y, int x);
+void	set_orientation(t_vec2 *dir,t_vec2 *plane, double dx, double dy);
 int		walkable_check(char c);
 int		surrounding_check(t_game *game, int y, int x);
 int		adjacent_check(t_game *game, int y, int x);

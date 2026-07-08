@@ -29,10 +29,10 @@ int	check_extension(char *file)
 	cub_extension = ".cub";
 	extension = file + (ft_strlen(file) - 4);
 	no_path = remove_path(file);
-	if (ft_strncmp(cub_extension,extension, 4) != 0)
-		return (-1);//error ARGS;
+	if (ft_strncmp(cub_extension, extension, 4) != 0)
+		return (-1);
 	if (ft_strcmp(no_path, ".cub") == 0)
-		return (-1);//error ARGS;
+		return (-1);
 	return (0);
 }
 
@@ -44,8 +44,8 @@ int	ft_strcmp(char *s1, char *s2)
 	while (s1[i] == s2[i] && s1[i] != '\0')
 		i++;
 	return (s1[i] - s2[i]);
-} 
- 
+}
+
 char	*remove_path(char *file)
 {
 	int		i;

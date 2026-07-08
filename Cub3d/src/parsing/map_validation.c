@@ -13,23 +13,30 @@ int	validate_map(t_game *game)
 		x = 0;
 		while (x < game->map_w)
 		{
-			if (!ft_strchr("X01NSWE", game->map[y][x]))
-				return (-1); //error needs handling.
-			if (ft_strchr("NSWE", game->map[y][x]))
-			{
-				player++;
-				if (player == 1)
-					set_start(game, y, x);
-			}
-			if (walkable_check(game->map[y][x]) == 0 &&
-				surrounding_check(game, y, x) == -1)
-				return (-1); //error needs handling.
+			if (validate_tile(game, y, x, &player) == -1)
+				return (-1);
 			x++;
 		}
 		y++;
 	}
 	if (player != 1)
-		return (-1); //error needs handling.
+		return (-1);
+	return (0);
+}
+
+int	validate_tile(t_game *game, int y, int x, int *player)
+{
+	if (!ft_strchr("X01NSWE", game->map[y][x]))
+		return (-1);
+	if (ft_strchr("NSWE", game->map[y][x]))
+	{
+		(*player)++;
+		if (*player == 1)
+			set_start(game, y, x);
+	}
+	if (walkable_check(game->map[y][x]) == 0
+		&& surrounding_check(game, y, x) == -1)
+		return (-1);
 	return (0);
 }
 

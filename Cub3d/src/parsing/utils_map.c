@@ -1,4 +1,3 @@
-
 #include "cub3D.h"
 
 int	max_width(int a, int b)
@@ -29,39 +28,27 @@ void	normalize_map(char *dest, char *src, int w)
 void	set_direction(t_game *game, int y, int x)
 {
 	if (game->map[y][x] == 'N')
-	{
-		game->player.dir.x = 0;
-		game->player.dir.y = -1;
-		game->player.plane.x = 0.66;
-		game->player.plane.y = 0;
-	}
+		set_orientation(&game->player.dir, &game->player.plane, 0, -1);
 	else if (game->map[y][x] == 'S')
-	{
-		game->player.dir.x = 0;
-		game->player.dir.y = 1;
-		game->player.plane.x = -0.66;
-		game->player.plane.y = 0;
-	}
+		set_orientation(&game->player.dir, &game->player.plane, 0, 1);
 	else if (game->map[y][x] == 'W')
-	{
-		game->player.dir.x = -1;
-		game->player.dir.y = 0;
-		game->player.plane.x = 0;
-		game->player.plane.y = -0.66;
-	}
+		set_orientation(&game->player.dir, &game->player.plane, -1, 0);
 	else
-	{
-		game->player.dir.x = 1;
-		game->player.dir.y = 0;
-		game->player.plane.x = 0;
-		game->player.plane.y = 0.66;
-	}
+		set_orientation(&game->player.dir, &game->player.plane, 1, 0);
+}
+
+void	set_orientation(t_vec2 *dir, t_vec2 *plane, double dx, double dy)
+{
+	dir->x = dx;
+	dir->y = dy;
+	plane->x = -dy * CAMERA_PLANE;
+	plane->y = dx * CAMERA_PLANE;
 }
 
 int	walkable_check(char c)
 {
-	if (c == '0' || c == 'N' || c == 'S' ||
-		c == 'E' || c == 'W')
+	if (c == '0' || c == 'N' || c == 'S'
+		|| c == 'E' || c == 'W')
 		return (0);
 	return (1);
 }

@@ -6,11 +6,10 @@
 	Checks if all the elements exist.
 */
 
-
 int	parsing(char *map_file, t_game *game)
 {
-	int	fd;
-	char *line;
+	int		fd;
+	char	*line;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
@@ -19,13 +18,13 @@ int	parsing(char *map_file, t_game *game)
 	if (!line)
 	{
 		close(fd);
-		return (-1); // error needs handling. file empty.
+		return (-1);
 	}
 	if (parse_line(game, line, fd) == -1)
 		return (-1);
 	close(fd);
 	if (check_elements(game))
-		return (-1);//error needs handling. missing elements.
+		return (-1);
 	return (0);
 }
 
@@ -43,30 +42,13 @@ int	parse_line(t_game *game, char *line, int fd)
 		parsed_line = ft_strtrim(line, "\t\v\f\n\r");
 		free(line);
 		ret = line_type(game, parsed_line, fd);
-		if (ret)
-		{
-			if (ret < 0)
-			{
-			//if(parsed_line)
-			//`	free(parsed_line);
-			//if (ret == -1)
-			//{
-		//		clean_gnl(game ,fd);
-		//		return (-1);
-		//	}
-			//	break ;
-				if (ret == -1)
-					free(parsed_line);
-				finish_reading(fd);
-				return (-1);
-			}
+		ret = handle_line_result(ret, parsed_line, fd);
+		if (ret == -1)
+			return (-1);
+		if (ret == 1)
 			break ;
-		}
-		else
-		{
-			free(parsed_line);
-			line = get_next_line(fd);
-		}
+		free(parsed_line);
+		line = get_next_line(fd);
 	}
 	return (0);
 }
@@ -75,7 +57,7 @@ int	parse_line(t_game *game, char *line, int fd)
 	Detects what type of line was read and redirects it to the correct parser.
 */
 
-int		line_type(t_game *game, char *line, int fd)
+int	line_type(t_game *game, char *line, int fd)
 {
 	int	i;
 
@@ -84,7 +66,7 @@ int		line_type(t_game *game, char *line, int fd)
 		return (0);
 	if (ft_strchr("FC", line[i]))
 	{
-		return (color_parser(game, line + i)); 
+		return (color_parser(game, line + i));
 	}
 	else if (ft_strchr("NSWE", line[i]))
 	{
@@ -93,15 +75,13 @@ int		line_type(t_game *game, char *line, int fd)
 	else if (line[i] == '1')
 	{
 		if (check_elements(game) == -1)
-			return (-1); //error needs handling. map has to be the last element.
+			return (-1);
 		if (valid_line(line) == -1)
 			return (-1);
 		if (parser_map(game, fd, line) == -1)
 			return (-2);
-
 		return (1);
 	}
-
 	return (-1);
 }
 
@@ -115,14 +95,14 @@ int	check_elements(t_game *game)
 		return (-1);
 	else if (game->floor_set == 0)
 		return (-1);
-	else if(!game->textures.ea_path)
-			return (-1);
-	else if(!game->textures.we_path)
-			return (-1);
-	else if(!game->textures.so_path)
-			return (-1);
-	else if(!game->textures.no_path)
-			return (-1);
+	else if (!game->textures.ea_path)
+		return (-1);
+	else if (!game->textures.we_path)
+		return (-1);
+	else if (!game->textures.so_path)
+		return (-1);
+	else if (!game->textures.no_path)
+		return (-1);
 	else
 		return (0);
 }
