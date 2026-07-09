@@ -183,6 +183,8 @@ int		line_type(t_game *game, char *line, int fd);
 int		handle_line_result(int ret, char *parsed_line, int fd);
 int		check_elements(t_game *game);
 int		valid_line(const char *line);
+int		validate_input(char *file);
+int		load_game(char *file, t_game *game);
 
 //textures parsing
 int		texture_parser(t_game *game, char *line);
@@ -190,7 +192,7 @@ int		assign_path(char *line, char **path);
 int		valid_path(char *line);
 char	*extract_path(char *line);
 bool	load_textures(t_game *game);
-int	texture_pixel(t_texture *tex, int x, int y);
+int		texture_pixel(t_texture *tex, int x, int y);
 
 //Color parsing
 int		color_parser(t_game *game, char *line);

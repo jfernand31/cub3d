@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mda-enca <mda-enca@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/09 11:58:13 by mda-enca          #+#    #+#             */
+/*   Updated: 2026/07/09 12:29:54 by mda-enca         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	init_game(t_game *game)
@@ -10,16 +22,26 @@ void	init_game(t_game *game)
 	game->player.plane.y = 0.66;
 }
 
-static void	print_char_array(char **array)
+int	validate_input(char *file)
 {
-	int	i;
+	int	fd;
 
-	i = 0;
-	while (array[i] != NULL)
-	{
-		printf("%s\n", array[i]);
-		i++;
-	}
+	if (check_extension(file) == -1)
+		return (-1);
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	close(fd);
+	return (0);
+}
+
+int	load_game(char *file, t_game *game)
+{
+	if (parsing(file, game) == -1)
+		return (error_exit(game, MAP), 1);
+	if (!game->map)
+		return (error_exit(game, MAP), 1);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -28,31 +50,20 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	ft_bzero(&game, sizeof(game));
-	if(argc != 2)
+	if (argc != 2)
 	{
 		error_message(ARGS);
 		return (1);
 	}
 	init_game(&game);
-	if (check_extension(argv[1]) == -1)
-		return (error_exit(&game, ARGS), 1);
-	else
+	if (validate_input(argv[1]) == -1)
+		return (error_exit(&game, FILE), 1);
+	if (load_game(argv[1], &game) == -1)
+		return (error_exit(&game, MAP), 1);
+	if (!run_game(&game))
 	{
-		fd = open(argv[1], O_RDONLY);
-		if (fd < 0)
-			return (error_exit(&game, FILE), 1);
-		close(fd);
-		if (parsing(argv[1], &game) == -1)
-			return (error_exit(&game, MAP), 1);
-		if (!game.map)
-			return (error_exit(&game, MAP), 1);
-		print_char_array(game.map);
-
-		if (!run_game(&game))
-		{
-			free_game(&game);
-			return (1);
-		}
+		free_game(&game);
+		return (1);
 	}
 	free_game(&game);
 	return (0);
