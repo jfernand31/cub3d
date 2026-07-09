@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color_parsing.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mda-enca <mda-enca@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/09 12:30:44 by mda-enca          #+#    #+#             */
+/*   Updated: 2026/07/09 12:31:03 by mda-enca         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 int	color_parser(t_game *game, char *line)
@@ -41,7 +53,7 @@ int	parse_rgb(char *line)
 	if (g == -1 || comma_check(&line) == -1)
 		return (-1);
 	b = rgb_value(&line);
-	if (b == -1) 
+	if (b == -1)
 		return (-1);
 	skip_whitespaces_ptr(&line);
 	if (*line != '\0' && *line != '\n')

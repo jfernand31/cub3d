@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_functions.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mda-enca <mda-enca@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/09 12:32:17 by mda-enca          #+#    #+#             */
+/*   Updated: 2026/07/09 12:32:18 by mda-enca         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	free_loaded_textures(t_game *game)
@@ -10,7 +22,6 @@ void	free_loaded_textures(t_game *game)
 		mlx_destroy_image(game->mlx, game->textures.we.img);
 	if (game->textures.ea.img)
 		mlx_destroy_image(game->mlx, game->textures.ea.img);
-
 	free_textures(&game->textures);
 }
 
