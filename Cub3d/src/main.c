@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfernand <jfernand@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/06 22:54:35 by jfernand          #+#    #+#             */
+/*   Updated: 2026/07/06 22:56:20 by jfernand         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	init_game(t_game *game)
@@ -28,7 +40,7 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	ft_bzero(&game, sizeof(game));
-	if(argc != 2)
+	if (argc != 2)
 	{
 		error_message(ARGS);
 		return (1);
@@ -47,7 +59,6 @@ int	main(int argc, char **argv)
 		if (!game.map)
 			return (error_exit(&game, MAP), 1);
 		print_char_array(game.map);
-
 		if (!run_game(&game))
 		{
 			free_game(&game);

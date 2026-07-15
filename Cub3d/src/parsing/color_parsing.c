@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color_parsing.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfernand <jfernand@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/06 19:40:32 by jfernand          #+#    #+#             */
+/*   Updated: 2026/07/06 19:41:31 by jfernand         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 int	color_parser(t_game *game, char *line)
@@ -8,7 +20,7 @@ int	color_parser(t_game *game, char *line)
 	if (*line == 'F')
 	{
 		if (game->floor_set == '1')
-			return (-1); //error needs handling. cant duplicate floor color.
+			return (-1);
 		line++;
 		skip_whitespaces_ptr(&line);
 		color = parse_rgb(line);
@@ -20,7 +32,7 @@ int	color_parser(t_game *game, char *line)
 	else if (*line == 'C')
 	{
 		if (game->ceiling_set == '1')
-			return (-1); //error needs handling. cant duplicate ceiling color.
+			return (-1);
 		line++;
 		skip_whitespaces_ptr(&line);
 		color = parse_rgb(line);
@@ -30,7 +42,7 @@ int	color_parser(t_game *game, char *line)
 		game->ceiling_set = '1';
 	}
 	else
-		return (-1); //error needs handling. unknown color identifier.
+		return (-1);
 	return (0);
 }
 
@@ -51,7 +63,7 @@ int	parse_rgb(char *line)
 		return (-1);
 	skip_whitespaces_ptr(&line);
 	if (*line != '\0' && *line != '\n')
-		return (-1); //error needs handling. characters after color.
+		return (-1);
 	return ((r << 16) | (g << 8) | b);
 }
 
@@ -61,12 +73,12 @@ int	rgb_value(char **line)
 
 	skip_whitespaces_ptr(line);
 	if (!ft_isdigit(**line))
-		return (-1); //error needs handling. invalid color format.
+		return (-1);
 	value = ft_atoi(*line);
 	while (ft_isdigit(**line))
 		(*line)++;
 	if (value < 0 || value > 255)
-		return (-1); //error needs handling. value out of range.
+		return (-1);
 	return (value);
 }
 
@@ -74,7 +86,7 @@ int	comma_check(char **line)
 {
 	skip_whitespaces_ptr(line);
 	if (**line != ',')
-		return (-1); //error needs handling. invalid color format. comma missing.
+		return (-1);
 	(*line)++;
 	return (0);
 }

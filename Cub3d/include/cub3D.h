@@ -133,14 +133,14 @@ typedef struct	s_game
 }	t_game;
 
 //utils
-t_vec2	vec2_mult(t_vec2 v, float n);
+t_vec2		vec2_mult(t_vec2 v, float n);
 
 //game
-bool	run_game(t_game *game);
+bool		run_game(t_game *game);
 
 //cleanup
-void	free_loaded_textures(t_game *game);
-void	free_game(t_game *game);
+void		free_loaded_textures(t_game *game);
+void		free_game(t_game *game);
 
 //events
 int		handle_key_release(int keycode, t_game *game);
@@ -148,30 +148,40 @@ int		handle_key_press(int keycode, t_game *game);
 int		close_game(t_game *game);
 
 //render
-void	draw_floor_ceiling(t_data *img, int floor, int ceiling);
-void	draw_player(t_data *img, t_player *player);
-void	draw_minimap(t_data *img, char **map, t_game *game);
-void	draw_square(t_data *img, int x, int y, int color);
-void	draw_square_pixel(t_data *img, int x, int y, int color);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		draw_floor_ceiling(t_data *img, int floor, int ceiling);
+void		draw_player(t_data *img, t_player *player);
+void		draw_minimap(t_data *img, char **map, t_game *game);
+void		draw_square(t_data *img, int x, int y, int color);
+void		draw_square_pixel(t_data *img, int x, int y, int color);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		render(void *param);
+void		put_pixel(t_data *img, int x, int y, int color);
+void		draw_square_pixel(t_data *img, int x, int y, int color);
+void		draw_square(t_data *img, int x, int y, int color);
 
 //raycast
-bool	raycast(t_game *game, char **map, t_player *player, t_data *img);
+bool		raycast(t_game *game, char **map, t_player *player, t_data *img);
+t_texture	check_wall(t_game *game, t_ray *ray);
+int		apply_shading(int color, t_ray *ray);
+int		set_tex_x(t_ray *ray, t_texture *tex);
+double		get_distance(t_ray *r, t_player *p);
+void		get_wall_x(t_ray *r, t_player *p);
+void		ray_step_x(t_ray *ray, t_player *player);
+void		ray_step_y(t_ray *ray, t_player *player);
 
 //movement
-void	update_player(t_game *game);
-void	player_movement(t_game *game, t_keys keys);
-void	player_rotate(t_player *player, t_keys keys);
+void		update_player(t_game *game);
+void		player_movement(t_game *game, t_keys keys);
+void		player_rotate(t_player *player, t_keys keys);
 
 //errors and free
 int		error_exit(t_game *game, int type);
-void	free_map(char **map, int map_h);
-void	error_message(int type);
-void	free_textures(t_textures *textures);
-void	free_game(t_game *game);
-void	clean_gnl(t_game *game, int fd);
-void	finish_reading(int fd);
+void		free_map(char **map, int map_h);
+void		error_message(int type);
+void		free_textures(t_textures *textures);
+void		free_game(t_game *game);
+void		clean_gnl(t_game *game, int fd);
+void		finish_reading(int fd);
 
 //parsing
 int		check_xpm_extension(char *path);
@@ -186,9 +196,9 @@ int		valid_line(const char *line);
 int		texture_parser(t_game *game, char *line);
 int		assign_path(char *line, char **path);
 int		valid_path(char *line);
-char	*extract_path(char *line);
-bool	load_textures(t_game *game);
-int	texture_pixel(t_texture *tex, int x, int y);
+char		*extract_path(char *line);
+bool		load_textures(t_game *game);
+int		texture_pixel(t_texture *tex, int x, int y);
 
 //Color parsing
 int		color_parser(t_game *game, char *line);
@@ -199,25 +209,25 @@ int		comma_check(char **line);
 //Map parsing
 int		parser_map(t_game *game, int fd, char *first_row);
 int		add_line(t_list **map_list, char *line, t_game *game);
-char	*replace_spaces(char *line);
+char		*replace_spaces(char *line);
 int		read_all(int fd, t_list **map, t_game *game);
 int		copy_list(t_game *game, t_list *list);
-void	normalize_map(char *dest, char *src, int w);
+void		normalize_map(char *dest, char *src, int w);
 
 //Map validation
 int		validate_map(t_game *game);
-void	set_start(t_game *game, int y, int x);
-void	set_direction(t_game *game, int y, int x);
+void		set_start(t_game *game, int y, int x);
+void		set_direction(t_game *game, int y, int x);
 int		walkable_check(char c);
 int		surrounding_check(t_game *game, int y, int x);
 int		adjacent_check(t_game *game, int y, int x);
 
 //Parsing utils
 int		ft_strcmp(char *s1, char *s2);
-char	*remove_path(char *file);
+char		*remove_path(char *file);
 int		space_check(char c);
 int		skip_whitespaces(char *line);
-void	skip_whitespaces_ptr(char **line);
+void		skip_whitespaces_ptr(char **line);
 int		max_width(int a, int b);
 int		read_empty_line(int fd, char *line);
 

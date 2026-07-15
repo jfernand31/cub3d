@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfernand <jfernand@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/06 19:46:23 by jfernand          #+#    #+#             */
+/*   Updated: 2026/07/06 19:57:32 by jfernand         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3D.h"
 
@@ -26,35 +37,41 @@ void	normalize_map(char *dest, char *src, int w)
 	dest[i] = '\0';
 }
 
+void	set_values(t_game *game, int axis, int dir, double plane)
+{
+	if (axis == 0)
+	{
+		game->player.dir.x = 0;
+		game->player.dir.y = dir;
+		game->player.plane.x = plane;
+		game->player.plane.y = 0;
+	}
+	if (axis == 1)
+	{
+		game->player.dir.x = dir;
+		game->player.dir.y = 0;
+		game->player.plane.x = 0;
+		game->player.plane.y = plane;
+	}
+}
+
 void	set_direction(t_game *game, int y, int x)
 {
 	if (game->map[y][x] == 'N')
 	{
-		game->player.dir.x = 0;
-		game->player.dir.y = -1;
-		game->player.plane.x = 0.66;
-		game->player.plane.y = 0;
+		set_values(game, 0, -1, 0.66);
 	}
 	else if (game->map[y][x] == 'S')
 	{
-		game->player.dir.x = 0;
-		game->player.dir.y = 1;
-		game->player.plane.x = -0.66;
-		game->player.plane.y = 0;
+		set_values(game, 0, 1, -0.66);
 	}
 	else if (game->map[y][x] == 'W')
 	{
-		game->player.dir.x = -1;
-		game->player.dir.y = 0;
-		game->player.plane.x = 0;
-		game->player.plane.y = -0.66;
+		set_values(game, 1, -1, -0.66);
 	}
 	else
 	{
-		game->player.dir.x = 1;
-		game->player.dir.y = 0;
-		game->player.plane.x = 0;
-		game->player.plane.y = 0.66;
+		set_values(game, 1, 1, 0.66);
 	}
 }
 

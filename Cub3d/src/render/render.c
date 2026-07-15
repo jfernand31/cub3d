@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfernand <jfernand@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/06 22:42:48 by jfernand          #+#    #+#             */
+/*   Updated: 2026/07/06 22:54:10 by jfernand         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -7,16 +19,14 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
-
 
 int	render(void *param)
 {
 	t_game	*game;
 
 	game = (t_game *)param;
-
 	draw_floor_ceiling(&game->img,
 		game->floor_color,
 		game->ceiling_color);
@@ -28,8 +38,6 @@ int	render(void *param)
 		game->win,
 		game->img.img,
 		0,
-		0
-	);
-
+		0);
 	return (0);
 }

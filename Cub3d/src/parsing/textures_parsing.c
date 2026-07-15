@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures_parsing.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfernand <jfernand@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/06 19:57:50 by jfernand          #+#    #+#             */
+/*   Updated: 2026/07/06 19:58:25 by jfernand         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 #include <fcntl.h>
 /*
@@ -14,7 +26,7 @@ int	texture_parser(t_game *game, char *line)
 	else if (ft_strncmp(line, "WE", 2) == 0 && space_check(line[2]))
 		return (assign_path(line, &game->textures.we_path));
 	else
-		return (-1); //error needs handling. unknown texture.
+		return (-1);
 }
 
 /*
@@ -40,7 +52,7 @@ int	assign_path(char *line, char **path)
 			return (-1);
 		return (0);
 	}
-	return (-1); //error needs handling. cant duplicate texture.
+	return (-1);
 }
 
 
@@ -73,9 +85,9 @@ char *extract_path(char *line)
 
 	path = line + 2;
 	if (space_check(*path) == 0)
-		return (NULL); //error needs handling. 
+		return (NULL); 
 	path = ft_strtrim(path, " \r\t\n\v\f");
 	if (!path)
-		return (NULL); //error needs handling.
+		return (NULL);
 	return (path);
 }

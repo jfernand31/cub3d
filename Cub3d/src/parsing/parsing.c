@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfernand <jfernand@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/06 19:45:37 by jfernand          #+#    #+#             */
+/*   Updated: 2026/07/06 19:46:15 by jfernand         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 #include <fcntl.h>
 
@@ -5,7 +17,6 @@
 	Opens the .cub file and starts it's parsing.
 	Checks if all the elements exist.
 */
-
 
 int	parsing(char *map_file, t_game *game)
 {
@@ -19,13 +30,13 @@ int	parsing(char *map_file, t_game *game)
 	if (!line)
 	{
 		close(fd);
-		return (-1); // error needs handling. file empty.
+		return (-1);
 	}
 	if (parse_line(game, line, fd) == -1)
 		return (-1);
 	close(fd);
 	if (check_elements(game))
-		return (-1);//error needs handling. missing elements.
+		return (-1);
 	return (0);
 }
 
@@ -93,7 +104,7 @@ int		line_type(t_game *game, char *line, int fd)
 	else if (line[i] == '1')
 	{
 		if (check_elements(game) == -1)
-			return (-1); //error needs handling. map has to be the last element.
+			return (-1);
 		if (valid_line(line) == -1)
 			return (-1);
 		if (parser_map(game, fd, line) == -1)

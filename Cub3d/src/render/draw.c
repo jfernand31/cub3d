@@ -1,49 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfernand <jfernand@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/06 22:42:25 by jfernand          #+#    #+#             */
+/*   Updated: 2026/07/06 22:51:31 by jfernand         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
-
-static inline void	put_pixel(t_data *img, int x, int y, int color)
-{
-	((unsigned int *)img->addr)
-		[y * (img->line_length / 4) + x] = color;
-}
-
-void	draw_square_pixel(t_data *img, int x, int y, int color)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while(j < 4)
-	{
-		i = 0;
-		while (i < 4)
-		{
-			put_pixel(img, x + i, y + j, color);
-			i++;
-		}
-		j++;
-	}
-}
-
-void	draw_square(t_data *img, int x, int y, int color)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (j < MINIMAP_SCALE)
-	{
-		i = 0;
-		while (i < MINIMAP_SCALE)
-		{
-			put_pixel(img,
-				x * MINIMAP_SCALE + i,
-				y * MINIMAP_SCALE + j,
-				color);
-			i++;
-		}
-		j++;
-	}
-}
 
 void	draw_floor_ceiling(t_data *img, int floor, int ceiling)
 {
@@ -58,7 +25,6 @@ void	draw_floor_ceiling(t_data *img, int floor, int ceiling)
 			put_pixel(img, x++, y, ceiling);
 		y++;
 	}
-
 	while (y < HEIGHT)
 	{
 		x = 0;
@@ -90,8 +56,9 @@ void	draw_minimap(t_data *img, char **map, t_game *game)
 int	texture_pixel(t_texture *tex, int x, int y)
 {
 	char	*pixel;
+
 	if (x < 0 || x >= tex->width)
-		return (0);	
+		return (0);
 	if (y < 0 || y >= tex->height)
 		return (0);
 	pixel = tex->addr + (y * tex->line_length) + (x * (tex->bpp / 8));
@@ -102,10 +69,8 @@ void	draw_player(t_data *img, t_player *player)
 {
 	int	x;
 	int	y;
-	
+
 	x = player->pos.x * MINIMAP_SCALE;
 	y = player->pos.y * MINIMAP_SCALE;
-
 	draw_square_pixel(img, x, y, 0xFFFFFF);
 }
-

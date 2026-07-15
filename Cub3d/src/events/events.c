@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfernand <jfernand@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/06 19:36:15 by jfernand          #+#    #+#             */
+/*   Updated: 2026/07/06 19:37:06 by jfernand         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 #include <stdlib.h>
 
@@ -19,7 +31,7 @@ int	handle_key_release(int keycode, t_game *game)
 		game->keys.a = false;
 	if (keycode == KEY_LEFT)
 		game->keys.left = false;
-	if(keycode == KEY_RIGHT)
+	if (keycode == KEY_RIGHT)
 		game->keys.right = false;
 	return (0);
 }
@@ -41,7 +53,7 @@ int	handle_key_press(int keycode, t_game *game)
 		game->keys.a = true;
 	if (keycode == KEY_LEFT)
 		game->keys.left = true;
-	if(keycode == KEY_RIGHT)
+	if (keycode == KEY_RIGHT)
 		game->keys.right = true;
 	return (0);
 }

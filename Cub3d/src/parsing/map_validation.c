@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_validation.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfernand <jfernand@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/06 19:58:33 by jfernand          #+#    #+#             */
+/*   Updated: 2026/07/06 19:58:59 by jfernand         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 int	validate_map(t_game *game)
@@ -14,7 +26,7 @@ int	validate_map(t_game *game)
 		while (x < game->map_w)
 		{
 			if (!ft_strchr("X01NSWE", game->map[y][x]))
-				return (-1); //error needs handling.
+				return (-1);
 			if (ft_strchr("NSWE", game->map[y][x]))
 			{
 				player++;
@@ -23,13 +35,13 @@ int	validate_map(t_game *game)
 			}
 			if (walkable_check(game->map[y][x]) == 0 &&
 				surrounding_check(game, y, x) == -1)
-				return (-1); //error needs handling.
+				return (-1);
 			x++;
 		}
 		y++;
 	}
 	if (player != 1)
-		return (-1); //error needs handling.
+		return (-1);
 	return (0);
 }
 
