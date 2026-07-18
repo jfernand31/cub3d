@@ -92,7 +92,7 @@ OBJS								= $(patsubst %.c, $(OBJS_DIR)/%.o, $(SRC))
 CC              = cc
 CFLAGS = -Wall -Wextra -Werror -g \
           -Wno-incompatible-pointer-types \
-          -Wno-cast-function-type
+          -Wno-bad-function-cast
 MLXFLAGS				= -L $(MLX_PATH) -lm -lmlx -Ilmlx -lXext -lX11
 INC             = -I $(INC_PATH)
 INC							+= -I $(LIB_PATH)

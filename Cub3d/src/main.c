@@ -46,7 +46,6 @@ int	load_game(char *file, t_game *game)
 
 int	main(int argc, char **argv)
 {
-	int		fd;
 	t_game	game;
 
 	ft_bzero(&game, sizeof(game));
