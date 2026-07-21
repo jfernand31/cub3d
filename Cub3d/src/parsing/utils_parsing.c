@@ -66,8 +66,6 @@ int	read_empty_line(int fd, char *line)
 
 int	handle_line_result(int ret, char *parsed_line, int fd)
 {
-	if (ret <= 0)
-		return (0);
 	if (ret < 0)
 	{
 		if (ret == -1)
@@ -75,5 +73,7 @@ int	handle_line_result(int ret, char *parsed_line, int fd)
 		finish_reading(fd);
 		return (-1);
 	}
-	return (1);
+	if (ret == 1)
+		return (1);
+	return (0);
 }

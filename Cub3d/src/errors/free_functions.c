@@ -12,16 +12,22 @@
 
 #include "cub3D.h"
 
+void	destroy_texture(void *mlx, t_texture *texture)
+{
+	if (mlx && texture->img)
+		mlx_destroy_image(mlx, texture->img);
+	texture->img = NULL;
+	texture->addr = NULL;
+}
+
 void	free_loaded_textures(t_game *game)
 {
-	if (game->textures.no.img)
-		mlx_destroy_image(game->mlx, game->textures.no.img);
-	if (game->textures.so.img)
-		mlx_destroy_image(game->mlx, game->textures.so.img);
-	if (game->textures.we.img)
-		mlx_destroy_image(game->mlx, game->textures.we.img);
-	if (game->textures.ea.img)
-		mlx_destroy_image(game->mlx, game->textures.ea.img);
+	if (!game)
+		return ;
+	destroy_texture(game->mlx, &game->textures.no);
+	destroy_texture(game->mlx, &game->textures.so);
+	destroy_texture(game->mlx, &game->textures.we);
+	destroy_texture(game->mlx, &game->textures.ea);
 	free_textures(&game->textures);
 }
 
@@ -48,6 +54,10 @@ void	free_textures(t_textures *textures)
 	free(textures->we_path);
 	free(textures->so_path);
 	free(textures->no_path);
+	textures->ea_path = NULL;
+	textures->we_path = NULL;
+	textures->so_path = NULL;
+	textures->no_path = NULL;
 }
 
 void	free_game(t_game *game)
@@ -56,8 +66,18 @@ void	free_game(t_game *game)
 		return ;
 	if (game->mlx && game->img.img)
 		mlx_destroy_image(game->mlx, game->img.img);
+	game->img.img = NULL;
+	game->img.addr = NULL;
 	if (game->mlx && game->win)
 		mlx_destroy_window(game->mlx, game->win);
+	game->win = NULL;
 	free_map(game->map, game->map_h);
+	game->map = NULL;
 	free_loaded_textures(game);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+		game->mlx = NULL;
+	}
 }

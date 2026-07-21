@@ -39,6 +39,8 @@ int	check_extension(char *file)
 	char	*no_path;
 
 	cub_extension = ".cub";
+	if (ft_strlen(file) < 5)
+		return (-1);
 	extension = file + (ft_strlen(file) - 4);
 	no_path = remove_path(file);
 	if (ft_strncmp(cub_extension, extension, 4) != 0)

@@ -116,6 +116,7 @@ int	copy_list(t_game *game, t_list *list)
 			while (y > 0)
 				free(game->map[--y]);
 			free(game->map);
+			game->map = NULL;
 			return (-1);
 		}
 		normalize_map(game->map[y], (char *)node->content, game->map_w);

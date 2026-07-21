@@ -33,7 +33,10 @@ int	parsing(char *map_file, t_game *game)
 		return (-1);
 	}
 	if (parse_line(game, line, fd) == -1)
+	{
+		close(fd);
 		return (-1);
+	}
 	close(fd);
 	if (check_elements(game))
 		return (-1);
@@ -53,10 +56,17 @@ int	parse_line(t_game *game, char *line, int fd)
 	{
 		parsed_line = ft_strtrim(line, "\t\v\f\n\r");
 		free(line);
+		if (!parsed_line)
+			return (finish_reading(fd), -1);
 		ret = line_type(game, parsed_line, fd);
 		ret = handle_line_result(ret, parsed_line, fd);
-		if (ret == -1)
+		if (ret < 0)
+		{
+			if (ret == -1)
+				free(parsed_line);
+			finish_reading(fd);
 			return (-1);
+		}
 		if (ret == 1)
 			break ;
 		free(parsed_line);

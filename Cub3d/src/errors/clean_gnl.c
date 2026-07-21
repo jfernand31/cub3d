@@ -15,6 +15,7 @@
 void	clean_gnl(t_game *game, int fd)
 {
 	finish_reading(fd);
+	close(fd);
 	free_game(game);
 	exit(1);
 }
@@ -29,5 +30,4 @@ void	finish_reading(int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	close(fd);
 }
