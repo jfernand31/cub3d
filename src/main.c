@@ -38,9 +38,9 @@ int	validate_input(char *file)
 int	load_game(char *file, t_game *game)
 {
 	if (parsing(file, game) == -1)
-		return (error_exit(game, MAP));
+		return (-1);
 	if (!game->map)
-		return (error_exit(game, MAP));
+		return (-1);
 	return (0);
 }
 

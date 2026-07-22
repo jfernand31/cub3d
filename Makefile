@@ -9,7 +9,7 @@ SHELL = bash
 #                                    Names                                     #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = Cub3D
 
 # **************************************************************************** #
 #                                    Paths                                     #
@@ -65,7 +65,7 @@ PLAYER_SRC_FILES		+= player_update.c
 
 RAYCASTING_SRC_PATH	= $(SRC_PATH)raycasting/
 
-RAYCASTING_SRC_FILES	= raycast.c
+RAYCASTING_SRC_FILES	= raycasting.c
 
 RENDER_SRC_PATH			= $(SRC_PATH)render/
 

@@ -25,7 +25,7 @@
 #define KEY_LEFT	  65361
 #define KEY_RIGHT	  65363
 #define KEY_ESC		  65307
-#define CAMERA_PLANE  0.66
+#define CAMERA_PLANE  0.50
 
 //Errors
 # define ARGS		  918
@@ -90,6 +90,7 @@ typedef struct s_ray
 	int			hit;
 	int			side;
 	double		perp_wall_dist;
+	double		wall_dist;
 	double		wall_x;
 }	t_ray;
 
@@ -227,6 +228,21 @@ int		skip_whitespaces(char *line);
 void	skip_whitespaces_ptr(char **line);
 int		max_width(int a, int b);
 int		read_empty_line(int fd, char *line);
+
+
+
+double get_perp_distance(t_ray *r, t_player *p);
+double abs_double(double n);
+double floor_double(double n);
+void	ray_step_x(t_ray *ray, t_player *player);
+void	ray_step_y(t_ray *ray, t_player *player);
+void	ray_step(t_ray *ray, t_player *player);
+void	ray_dda(t_game *g, t_ray *ray, char **map, t_data *img);
+t_texture	check_wall(t_game *game, t_ray *ray);
+int		apply_shading(int color, t_ray *ray);
+void	draw_vertical_line(t_game *game, int line_height, int x, t_ray *ray);
+double	get_wall_distance(t_ray *r, t_player *p);
+
 
 #endif
 

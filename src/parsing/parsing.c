@@ -59,7 +59,6 @@ int	parse_line(t_game *game, char *line, int fd)
 		if (!parsed_line)
 			return (finish_reading(fd), -1);
 		ret = line_type(game, parsed_line, fd);
-		ret = handle_line_result(ret, parsed_line, fd);
 		if (ret < 0)
 		{
 			if (ret == -1)
@@ -68,11 +67,11 @@ int	parse_line(t_game *game, char *line, int fd)
 			return (-1);
 		}
 		if (ret == 1)
-			break ;
-		free(parsed_line);
+			return (0);
+		free (parsed_line);
 		line = get_next_line(fd);
 	}
-	return (0);
+	return (1);
 }
 
 /*
