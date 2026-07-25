@@ -89,7 +89,7 @@ int	read_all(int fd, t_list **map, t_game *game)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (skip_whitespaces(line) == -1)
+		if (skip_whitespaces(line) == -1 && map_space_line(line) == 0)
 			return (read_empty_line(fd, line));
 		if (add_line(map, line, game) == -1)
 			return (-1);

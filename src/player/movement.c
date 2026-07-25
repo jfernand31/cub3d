@@ -32,11 +32,11 @@ void	rotate(t_vec2 *vec, float rot)
 	vec->y = old_vec_x * s + vec->y * c;
 }
 
-
 void	player_rotate(t_player *player, t_keys keys)
 {
-	const float	rot = 0.03;
+	const float	rot;
 
+	rot = 0.03;
 	if (keys.right)
 	{
 		rotate(&player->dir, rot);
@@ -51,10 +51,11 @@ void	player_rotate(t_player *player, t_keys keys)
 
 void	player_movement(t_game *game, t_keys keys)
 {
-	const float	speed = 0.05;
+	const float	speed;
 	t_vec2		move;
 
-	move = (t_vec2){0,0};
+	move = (t_vec2){0, 0};
+	speed = 0.05;
 	if (keys.w)
 		move = vec2_mult(game->player.dir, speed);
 	if (keys.s)

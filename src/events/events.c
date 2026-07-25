@@ -19,7 +19,7 @@ int	handle_key_release(int keycode, t_game *game)
 		game->keys.a = false;
 	if (keycode == KEY_LEFT)
 		game->keys.left = false;
-	if(keycode == KEY_RIGHT)
+	if (keycode == KEY_RIGHT)
 		game->keys.right = false;
 	return (0);
 }
@@ -41,7 +41,7 @@ int	handle_key_press(int keycode, t_game *game)
 		game->keys.a = true;
 	if (keycode == KEY_LEFT)
 		game->keys.left = true;
-	if(keycode == KEY_RIGHT)
+	if (keycode == KEY_RIGHT)
 		game->keys.right = true;
 	return (0);
 }

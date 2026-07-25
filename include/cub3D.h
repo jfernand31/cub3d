@@ -186,6 +186,7 @@ int		check_elements(t_game *game);
 int		valid_line(const char *line);
 int		validate_input(char *file);
 int		load_game(char *file, t_game *game);
+int		map_space_line(char *line);
 
 //textures parsing
 int		texture_parser(t_game *game, char *line);
@@ -242,7 +243,10 @@ t_texture	check_wall(t_game *game, t_ray *ray);
 int		apply_shading(int color, t_ray *ray);
 void	draw_vertical_line(t_game *game, int line_height, int x, t_ray *ray);
 double	get_wall_distance(t_ray *r, t_player *p);
-
+t_texture	init_textures(t_game *game, t_ray *ray, t_draw *draw);
+void		setup_draw(t_draw *draw, t_texture tex, int line_height, double *tex_pos);
+void		draw_pixels(t_game *game, t_draw *draw, t_texture tex, t_ray *ray);
+void		process_ray(t_game *game, t_player *player, t_ray *ray, int x);
 
 #endif
 
