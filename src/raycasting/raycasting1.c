@@ -1,4 +1,5 @@
 #include "../../include/cub3D.h"
+#include <math.h>
 
 t_texture	check_wall(t_game *game, t_ray *ray)
 {
@@ -31,7 +32,6 @@ void	draw_vertical_line(t_game *game, int line_height, int x, t_ray *ray)
 {
 	double		step;
 	double		tex_pos;
-	int			draw_start;
 	t_draw		draw;
 	t_texture	tex;
 

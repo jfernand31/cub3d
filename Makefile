@@ -67,13 +67,13 @@ PLAYER_SRC_FILES		+= player_update.c
 RAYCASTING_SRC_PATH	= $(SRC_PATH)raycasting/
 
 RAYCASTING_SRC_FILES	= raycasting.c
-RAYCASTING_SRC_FILES	= raycasting1.c
-RAYCASTING_SRC_FILES	= raycasting2.c
+RAYCASTING_SRC_FILES	+= raycasting1.c
+RAYCASTING_SRC_FILES	+= raycasting2.c
 
 RENDER_SRC_PATH			= $(SRC_PATH)render/
 
 RENDER_SRC_FILES		= draw.c
-RENDER_SRC_FILES		= draw1.c
+RENDER_SRC_FILES		+= draw1.c
 RENDER_SRC_FILES		+= render.c
 RENDER_SRC_FILES		+= load_textures.c
 
