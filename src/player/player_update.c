@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../../include/cub3D.h"
 
 void	update_player(t_game *game)
 {

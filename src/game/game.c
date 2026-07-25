@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../../include/cub3D.h"
 
 int	game_loop(t_game *game)
 {

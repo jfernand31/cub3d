@@ -1,6 +1,6 @@
-#include "cub3D.h"
+#include "../../include/cub3D.h"
 
-static inline void	put_pixel(t_data *img, int x, int y, int color)
+void	put_pixel(t_data *img, int x, int y, int color)
 {
 	((unsigned int *)img->addr)
 	[y * (img->line_length / 4) + x] = color;

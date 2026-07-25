@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../../include/cub3D.h"
 #include <math.h>
 
 t_vec2	vec2_mult(t_vec2 v, float n)
@@ -6,7 +6,7 @@ t_vec2	vec2_mult(t_vec2 v, float n)
 	return ((t_vec2){v.x * n, v.y * n});
 }
 
-static void	try_move(t_game *g, t_vec2 move)
+void	try_move(t_game *g, t_vec2 move)
 {
 	t_player	*p;
 
@@ -34,7 +34,7 @@ void	rotate(t_vec2 *vec, float rot)
 
 void	player_rotate(t_player *player, t_keys keys)
 {
-	const float	rot;
+	float	rot;
 
 	rot = 0.03;
 	if (keys.right)
@@ -51,7 +51,7 @@ void	player_rotate(t_player *player, t_keys keys)
 
 void	player_movement(t_game *game, t_keys keys)
 {
-	const float	speed;
+	float	speed;
 	t_vec2		move;
 
 	move = (t_vec2){0, 0};

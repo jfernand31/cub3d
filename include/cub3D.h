@@ -134,37 +134,6 @@ typedef struct	s_game
 	t_textures	textures;
 }	t_game;
 
-//utils
-t_vec2	vec2_mult(t_vec2 v, float n);
-
-//game
-bool	run_game(t_game *game);
-
-//cleanup
-void	free_loaded_textures(t_game *game);
-void	free_game(t_game *game);
-
-//events
-int		handle_key_release(int keycode, t_game *game);
-int		handle_key_press(int keycode, t_game *game);
-int		close_game(t_game *game);
-
-//render
-void	draw_floor_ceiling(t_data *img, int floor, int ceiling);
-void	draw_player(t_data *img, t_player *player);
-void	draw_minimap(t_data *img, char **map, t_game *game);
-void	draw_square(t_data *img, int x, int y, int color);
-void	draw_square_pixel(t_data *img, int x, int y, int color);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		render(void *param);
-
-//raycast
-bool	raycast(t_game *game, char **map, t_player *player, t_data *img);
-
-//movement
-void	update_player(t_game *game);
-void	player_movement(t_game *game, t_keys keys);
-void	player_rotate(t_player *player, t_keys keys);
 
 //errors and free
 int		error_exit(t_game *game, int type);
@@ -174,6 +143,7 @@ void	free_textures(t_textures *textures);
 void	free_game(t_game *game);
 void	clean_gnl(t_game *game, int fd);
 void	finish_reading(int fd);
+void	free_loaded_textures(t_game *game);
 
 //parsing
 int		check_xpm_extension(char *path);
@@ -232,21 +202,46 @@ int		read_empty_line(int fd, char *line);
 
 
 
-double get_perp_distance(t_ray *r, t_player *p);
-double abs_double(double n);
-double floor_double(double n);
-void	ray_step_x(t_ray *ray, t_player *player);
-void	ray_step_y(t_ray *ray, t_player *player);
-void	ray_step(t_ray *ray, t_player *player);
-void	ray_dda(t_game *g, t_ray *ray, char **map, t_data *img);
+double		get_perp_distance(t_ray *r, t_player *p);
+double		abs_double(double n);
+double		floor_double(double n);
+void		ray_step_x(t_ray *ray, t_player *player);
+void		ray_step_y(t_ray *ray, t_player *player);
+void		ray_step(t_ray *ray, t_player *player);
+void		ray_dda(t_game *g, t_ray *ray, char **map, t_data *img);
 t_texture	check_wall(t_game *game, t_ray *ray);
-int		apply_shading(int color, t_ray *ray);
-void	draw_vertical_line(t_game *game, int line_height, int x, t_ray *ray);
-double	get_wall_distance(t_ray *r, t_player *p);
+int			apply_shading(int color, t_ray *ray);
+void		draw_vertical_line(t_game *game, int line_height, int x, t_ray *ray);
+double		get_wall_distance(t_ray *r, t_player *p);
 t_texture	init_textures(t_game *game, t_ray *ray, t_draw *draw);
 void		setup_draw(t_draw *draw, t_texture tex, int line_height, double *tex_pos);
-void		draw_pixels(t_game *game, t_draw *draw, t_texture tex, t_ray *ray);
 void		process_ray(t_game *game, t_player *player, t_ray *ray, int x);
+void		ray_calculate_delta(t_ray *ray);
+double		get_distance(t_ray *ray, t_player *p);
+void		get_wall_x(t_ray *ray, t_player *p);
+int			close_game(t_game *game);
+int			handle_key_release(int keycode, t_game *game);
+int			handle_key_press(int keycode, t_game *game);
+int			game_loop(t_game *game);
+bool		run_game(t_game *game);
+t_vec2		vec2_mult(t_vec2 v, float n);
+void		try_move(t_game *g, t_vec2 move);
+void		rotate(t_vec2 *vec, float rot);
+void		player_rotate(t_player *player, t_keys keys);
+void		player_movement(t_game *game, t_keys keys);
+void		update_player(t_game *game);
+bool		raycast(t_game *game, char **map, t_player *player);
+void		put_pixel(t_data *img, int x, int y, int color);
+void		draw_square_pixel(t_data *img, int x, int y, int color);
+void		draw_square(t_data *img, int x, int y, int color);
+void		draw_floor_ceiling(t_data *img, int floor, int ceiling);
+void		draw_minimap(t_data *img, char **map, t_game *game);
+int			texture_pixel(t_texture *tex, int x, int y);
+void		draw_player(t_data *img, t_player *player);
+bool		load_single_texture(void *mlx, char *path, t_texture *tex);
+bool		load_textures(t_game *game);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int			render(void *param);
 
 #endif
 

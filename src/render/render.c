@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../../include/cub3D.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -18,7 +18,7 @@ int	render(void *param)
 	draw_floor_ceiling(&game->img,
 		game->floor_color,
 		game->ceiling_color);
-	raycast(game, game->map, &game->player, &game->img);
+	raycast(game, game->map, &game->player);
 	draw_minimap(&game->img, game->map, game);
 	draw_player(&game->img, &game->player);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img,
