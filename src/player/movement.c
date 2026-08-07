@@ -51,7 +51,7 @@ void	player_rotate(t_player *player, t_keys keys)
 
 void	player_movement(t_game *game, t_keys keys)
 {
-	float	speed;
+	float		speed;
 	t_vec2		move;
 
 	move = (t_vec2){0, 0};
