@@ -14,7 +14,6 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-
 void	*ft_calloc(size_t n_elem, size_t el_size)
 {
 	char	*ptr;
@@ -29,4 +28,3 @@ void	*ft_calloc(size_t n_elem, size_t el_size)
 	ft_memset(ptr, 0, (n_elem * el_size));
 	return (ptr);
 }
-
