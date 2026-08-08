@@ -45,8 +45,8 @@ int	check_extension(char *file)
 	no_path = remove_path(file);
 	if (ft_strncmp(cub_extension, extension, 4) != 0)
 		return (-1);
-	if (ft_strcmp(no_path, ".cub") == 0)
-		return (0);
+	if (ft_strcmp(no_path, ".cub") != 0)
+		return (-1);
 	return (0);
 }
 
